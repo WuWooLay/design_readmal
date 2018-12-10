@@ -16,10 +16,30 @@
 
 /* Right Navigation */
 .Navigation_Right {
-    background-color: #fff;
+    background-color: rgba(0,0,0, 0.95);
+    color: #ffffff;
     width: 100vw;
     height: 100vh;
     position: fixed;
     z-index: 2;
-    display: none;
+    left: 100%;
+}
+
+.Navigation_Right > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.Navigation_Right > ul > li {
+    padding: 1.5rem 0;
+    position: relative;
+}
+
+.Navigation_Right_Closer {
+    position: absolute;
+    right: 10%;
+    top: -14px;
 }
