@@ -7,9 +7,19 @@
     line-height: 50px;
     position: fixed;
     width: 100%;
+    z-index: 1;
 }
 
 .Navigation .Center_Logo {
     width: 50px;
 }
 
+/* Right Navigation */
+.Navigation_Right {
+    background-color: #fff;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 2;
+    display: none;
+}
