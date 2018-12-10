@@ -43,3 +43,35 @@
     right: 10%;
     top: -14px;
 }
+
+.Navigation_Right > ul > li > a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: 0.5s all linear;
+    /* overflow: hidden; */
+    position:relative;
+    display: inline-block;
+}
+
+
+
+.Navigation_Right > ul > li > a:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 6px;
+    background-color: #000000;
+    box-shadow: 0 0 1px 1px #0b0d0e;
+    position: absolute;
+    left: 50%;
+    transform: translate(-100%, -50%) scaleX(0);
+    top: 60%;
+    border-radius: 1rem;
+    transition: 0.2s all ease-in-out;
+}
+
+.Navigation_Right > ul > li > a:hover:after {
+    transform: translate(-50%, -50%) scaleX(1);
+
+}
+
