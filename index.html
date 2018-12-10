@@ -12,9 +12,17 @@
     <link rel="stylesheet" href="/css/navigation/navigation.css">
     <link rel="stylesheet" href="/css/helper/helper.css">
     
+    <link rel="icon" href="/favicon.ico"/>
+
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    
+    <!-- Right Navigation -->
+    <script src="/js/navigation/navigation_right.js"></script>
+    <!-- Right Navigation End-->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
 
     <!-- Ionic -->
     <link href="https://unpkg.com/ionicons@4.4.8/dist/css/ionicons.min.css" rel="stylesheet">
@@ -28,7 +36,8 @@
     <!-- Nav Container Start-->
     <nav>
 
-        <div id="nav" class="Navigation">
+        <!-- Center Navigation And Logo -->
+        <div id="Navigation_Bar" class="Navigation">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 text-center">
@@ -38,15 +47,16 @@
                         <img class="Center_Logo Pointer" src="/images/ReadMal_Logo.svg" alt="">
                     </div>
                     <div class="col-4 text-center">
-                        <i class="icon ion-ios-menu Font_Size_40_px Pointer"></i> 
+                        <i class="icon ion-ios-menu Font_Size_40_px Pointer" id="Navigation_Right_Opener"></i> 
                     </div>
                 </div>
             </div>
 
         </div>
+        <!-- Center Navigation And Logo End-->
 
         <!-- List Container Start-->
-        <div class="Navigation_Right" id="list">
+        <div class="Navigation_Right" id="Navigation_Right">
             Right
         </div>
         <!-- List Container End -->
