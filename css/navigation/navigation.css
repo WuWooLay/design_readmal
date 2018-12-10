@@ -1,9 +1,13 @@
 .Navigation {
-    /* background-color: rgba(0,0,0, 0.8); */
-    /* color: #fff; */
+    background-color: rgba(0,0,0, 1);
+    color: #fff;
     border-bottom: 1px solid #dfdfdf;
+    height: 55px;
+    line-height: 50px;
+    
 }
 
 .Navigation .Center_Logo {
     width: 50px;
 }
+
