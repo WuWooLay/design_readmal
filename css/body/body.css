@@ -1,3 +1,9 @@
 body {
     background-image: url('/images/wall_paper/Evil_With_Sword_in_Dark.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    min-height: 200vh;
 }
