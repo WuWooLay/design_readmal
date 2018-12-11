@@ -12,6 +12,10 @@
 
 }
 
+.Font_Size_1_point_6_rem {
+    font-size: 1.6rem
+}
+
 .Pointer {
     cursor: pointer;
 }

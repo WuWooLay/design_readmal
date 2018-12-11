@@ -1,0 +1,44 @@
+.Loading_Container {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background-color: #fff; */
+}
+
+.Loading_Container:before {
+    content: "";
+    display: block;
+    background-color: rgba(10, 10, 10, 0.95);
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    text-align: center;
+}
+
+.Loading_Container:after {
+    content: "Loading";
+    color: #ffffff;
+    display: block;
+    background-color: rgba(10, 10, 10, 0.95);
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
+.Loading_Container > img {
+    width: 200px;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    text-align: center;
+}
