@@ -56,7 +56,6 @@
 }
 
 .Message_Small_Scroll_Container {
-    min-height: 100vh;
 }
 
 
@@ -86,6 +85,7 @@
     margin-top: 0.5rem;
     font-size: 1.3rem;
     padding-bottom: 0.3rem;
+    transform-origin: 50% 50%;
 }
 .Message_Story:after {
     content:"";
