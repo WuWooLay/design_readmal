@@ -34,7 +34,7 @@
 }
 
 .Navigation_Right > ul > li {
-    padding: 1.5rem 0;
+    padding: 1.3rem  0;
     position: relative;
 }
 
@@ -66,7 +66,6 @@
     left: 50%;
     transform: translate(-100%, -50%) scaleX(0);
     top: 60%;
-    border-radius: 1rem;
     transition: 0.2s all ease-in-out;
 }
 

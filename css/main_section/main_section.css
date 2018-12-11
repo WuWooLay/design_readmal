@@ -1,0 +1,16 @@
+.Main_Section {
+    padding-top: 70px;
+    color: #ffffff;
+}
+
+/* For Card */
+.Card {
+    background-color: rgba(0,0,0, 0.65);
+}
+
+.Card .Image_Place {
+    min-height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
