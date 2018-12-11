@@ -2,8 +2,51 @@
     width: 100vw;
     height: 100vh;
     background-color: #000000;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     position: fixed;
     z-index: 8;
     top: 0;
     left: 0;
+}
+
+.Story_Model:before {
+    content: "";
+    width: 500px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: rgba(0,0,0, 0.8);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+}
+
+.Story_Model_Container {
+    width: 500px;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    z-index: 9;
+    color: #ffffff;
+}
+
+.Story_Model_Nav {
+    background-color: #000000;
+}
+
+@media screen and (max-width: 700px) {
+    .Story_Model_Container {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0,0, 0.8);
+    }
+
+    .Story_Model:before {
+        width: 0;
+    }
+    
 }
