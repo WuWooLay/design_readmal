@@ -13,8 +13,8 @@
     content: "";
     display: block;
     background-color: rgba(10, 10, 10, 0.95);
-    width: 300px;
-    height: 300px;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -24,13 +24,17 @@
 }
 
 .Loading_Container:after {
-    content: "Loading";
+    content: "Loading ... ";
+    font-size: 1.5rem;
     color: #ffffff;
     display: block;
-    background-color: rgba(10, 10, 10, 0.95);
+    /* background-color: rgba(10, 10, 10, 0.95); */
     position: relative;
-    top: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
     left: 50%;
+    text-align: center;
+    z-index: 4;
 }
 
 .Loading_Container > img {

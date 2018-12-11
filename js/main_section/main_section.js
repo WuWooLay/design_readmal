@@ -1,7 +1,11 @@
 $(document).ready( function () {
 
     $('.More').click( function () {
-        alert("Link");
+        $('#Loading_Container').removeClass('d-none');
+
+        setTimeout(function () {
+            $('#Loading_Container').addClass('d-none');
+        }, 2000);
     });
 
 });
