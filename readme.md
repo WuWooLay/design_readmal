@@ -1,5 +1,6 @@
 <div>
-    <h1 align="center"> Read Me </h1>
+    <h1 align="center"> Read Mal</h1>
+    <h3 align="center"> Design by Lwin Moe Paing</h3>
 </div>
 
 <p align="center">
