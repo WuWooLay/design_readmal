@@ -5,7 +5,13 @@ $(document).ready( function () {
 
         setTimeout(function () {
             $('#Loading_Container').addClass('d-none');
-        }, 3000);
+            $('#Story_Model').removeClass('d-none');
+        }, 2500);
+    });
+
+
+    $('#Back').click( function () {
+        $('#Story_Model').addClass('d-none');
     });
 
 });
