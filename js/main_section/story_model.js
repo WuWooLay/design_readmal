@@ -47,14 +47,15 @@ $(document).ready( function () {
     };
 
     var messageArray = [
-        {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
+        {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg',  audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
         {id: '2', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ေအးဆုိ', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '3', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ခုခ်ိန္ဆုိ ဘယ္သူ့မွလည္းရွိမွာမဟုတ္သးဘူး', color: '#0b93f6', vibrate: true, vibrate_pattern: [500,200,500,800,500,200,500], background_change: false, background_image: '', audio: false, audio_url: ''},
+        {id: '3', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ခုခ်ိန္ဆုိ ဘယ္သူ့မွလည္းရွိမွာမဟုတ္သးဘူး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
         {id: '4', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ေတြ့လားသားေလး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: true, background_image: '/images/story_card/ghost_door.jpg', audio: true, audio_url: '/audio/ghost/creaking_door.mp3'},
         {id: '5', name: 'ႏွင္းႏွင္း', position: 'Right', type: 'message', message: 'နင္တုိ့ကလည္းဟာ ဘာလုိ့ တံခါးအရင္မေခါက္တာလဲ..', color: '#dc3545', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
         {id: '6', name: ' ', position: 'Center', type: 'think', message: 'ဒီလိုညၾကီးမွာ ကားပ်က္သြားတဲ့ သူငယ္ခ်င္းေတြအဖုိ့ေတာ့ ......  ', color: '#43a047', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '', audio: false, audio_url: ''},
         {id: '7', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'အာ့ေၾကာင့္ ငါေျပာသားပဲ မင္းတုိ့ အတြဲသာ ညဘက္ၾကီး ခရီးသြားဖို့ မေျပာခဲ့ရင္ ဘာမွျဖစ္မွာမဟုတ္ဘူး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
         {id: '8', name: 'ႏွင္းႏွင္း', position: 'Right', type: 'message', message: ' ရွဴး တုိးတုိးလုပ္ပါဟာ တျခားသူေတြ ၾကားရင္.. ငါေၾကာက္တယ္ဟ ', color: '#dc3545', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
+        {id: '9', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ခ်စ္ရာ အရမ္းလည္း မေၾကာက္ပါနဲ ့ ကိုကိုရွိတယ္ အဟဲ...', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
     ];
 
     var audio_list = [
@@ -122,6 +123,11 @@ $(document).ready( function () {
             $('#Story_Model').removeClass('d-none');
 
             $('#Message_Story_List > li').remove();
+            if(messageArray[count].background_change) {
+                $('#Story_Model').css('background-image','url('+messageArray[count].background_image+')');
+            }
+    
+           
 
             if(messageArray[count].audio) {
                 audioPlay(messageArray[count].audio_url);
@@ -137,6 +143,11 @@ $(document).ready( function () {
             }
             
             $('#Message_Story_List').append(build);
+            
+            if(navigator.vibrate && messageArray[count].vibrate) {
+                navigator.vibrate(messageArray[count].vibrate_pattern);
+            }
+
             count++;
         }, 1500);
     });
