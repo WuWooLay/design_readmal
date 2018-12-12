@@ -1,4 +1,13 @@
 $(document).ready( function () {
+
+    navigator.vibrate = navigator.vibrate ||
+    navigator.webkitVibrate ||
+    navigator.mozVibrate ||
+    navigator.msVibrate;
+
+    if(!navigator.vibrate) {
+        alert('Your Web Browser not supported Vibrate');
+    }
     
     $('#Story_Model_Content_Message_Section').click( function () {
         
@@ -16,7 +25,8 @@ $(document).ready( function () {
         {
                 scrollTop:$('#Story_Model_Content_Message_Section')[0].scrollHeight
         }, 500);
-        
+
+        navigator.vibrate([800]);
     });
     
 });
