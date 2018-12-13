@@ -59,7 +59,14 @@ $(document).ready( function () {
     ];
 
 
+    // Message Array Count
     var count = 0;
+    // Done Or Not
+    var storyDone = false;
+    // Auto Play Or Not and Control For Tap 
+    var autoPlay = false;
+    // Set Interval 
+    var autoPlayCount = "";
 
     var workingFunc = function () {
         
@@ -106,63 +113,107 @@ $(document).ready( function () {
 
     
     $('#Story_Model_Content_Message_Section').click( function () {
-        workingFunc();
+        if(!autoPlay) {
+            workingFunc();
+        }
     });
 
     $('#Story_Model_Content_Auto_Section_Content').click(function () {
-        workingFunc();
+        if(!autoPlay) {
+            workingFunc();
+        }
     });
 
 
     // Pause or Unpause 
 
+    var play = function () {
+        anime({
+            targets: '#AutoPlay_1 ',
+            points: [
+                { value: '39.6,4.8 39.6,95.8 10.5,95.8 10.5,4.8' },
+            ],
+            easing: 'linear',
+            duration: 400 ,
+        });
+        anime ({
+            targets: '#AutoPlay_2 ',
+            points: [
+                { value: '89.6,96.3 90,4.7 60.2,4.5 60.5,96.3 ' },
+            ],
+            easing: 'linear',
+            duration: 400 ,
+        });
+
+        $('.Pause_Unpause_Circle svg').css('transform', 'translate(0,0)');
+        $('#Pause_Unpause_Circle').data('pause',true);
+       
+        autoPlay = true;
+
+        // When Play
+        if(count < messageArray.length) {
+            workingFunc();
+
+            autoPlayCount = setInterval( function () {
+                if(count >= messageArray.length) {
+                    clearInterval(autoPlayCount);
+                    pause();
+                }
+
+                workingFunc();
+            }, 3500);
+
+        }
+
+    }
+
+    var pause = function () {
+        anime({
+            targets: '#AutoPlay_1 ',
+            points: [
+                { value: '48.3,26.5 48.3,74.1 10.5,95.8 10.5,4.8 ' },
+            ],
+            easing: 'linear',
+            duration: 400 ,
+        });
+        anime ({
+            targets: '#AutoPlay_2 ',
+            points: [
+                { value: '89.7,50.4 68.5,38.2 48.6,26.8 48.6,73.8 ' },
+            ],
+            easing: 'linear',
+            duration: 400 ,
+        });
+
+        $('.Pause_Unpause_Circle svg').css('transform', 'translate(2px,0)');
+
+        $('#Pause_Unpause_Circle').data('pause',false);
+
+        // When Pause
+        autoPlay = false;
+
+        if(autoPlayCount) {
+            clearInterval(autoPlayCount);
+        }
+    }
+
+    // Pause or unpause Circle Click
     $('#Pause_Unpause_Circle').click( function () {
         var pause_or_not = $(this).data('pause');
-        console.log(pause_or_not);
+        
+        // console.log(pause_or_not);
+        if(count >= messageArray.length) {
+            return false;
+        }
+
         if(!pause_or_not) {
+
+            play();
             
-            anime({
-                targets: '#AutoPlay_1 ',
-                points: [
-                    { value: '39.6,4.8 39.6,95.8 10.5,95.8 10.5,4.8' },
-                ],
-                easing: 'linear',
-                duration: 400 ,
-            });
-            anime ({
-                targets: '#AutoPlay_2 ',
-                points: [
-                    { value: '89.6,96.3 90,4.7 60.2,4.5 60.5,96.3 ' },
-                ],
-                easing: 'linear',
-                duration: 400 ,
-            });
-
-            $('.Pause_Unpause_Circle svg').css('transform', 'translate(0,0)');
-
-            $(this).data('pause',true);
         } else {
            
-            anime({
-                targets: '#AutoPlay_1 ',
-                points: [
-                    { value: '48.3,26.5 48.3,74.1 10.5,95.8 10.5,4.8 ' },
-                ],
-                easing: 'linear',
-                duration: 400 ,
-            });
-            anime ({
-                targets: '#AutoPlay_2 ',
-                points: [
-                    { value: '89.7,50.4 68.5,38.2 48.6,26.8 48.6,73.8 ' },
-                ],
-                easing: 'linear',
-                duration: 400 ,
-            });
+           pause();
 
-            $('.Pause_Unpause_Circle svg').css('transform', 'translate(2px,0)');
-
-            $(this).data('pause',false);
         }
 
     }) ;
@@ -184,6 +235,7 @@ $(document).ready( function () {
             
             workingFunc();
         }, 1500);
+        
     });
 
     
