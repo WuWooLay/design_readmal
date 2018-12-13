@@ -58,23 +58,17 @@ $(document).ready( function () {
         {id: '9', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ခ်စ္ရာ အရမ္းလည္း မေၾကာက္ပါနဲ ့ ကိုကိုရွိတယ္ အဟဲ...', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
     ];
 
-    var audio_list = [
-
-    ];
 
     var count = 0;
 
-    console.log(messageArray);
-    
-    $('#Story_Model_Content_Message_Section').click( function () {
-       
+    var workingFunc = function () {
+        
         if(count >= messageArray.length) {
             alert('The End');
             return false;
         }
 
         var build = '';
-
 
         if(messageArray[count].audio) {
             audioPlay(messageArray[count].audio_url);
@@ -108,7 +102,71 @@ $(document).ready( function () {
         }
        
         count++;
+    };
+
+    
+    $('#Story_Model_Content_Message_Section').click( function () {
+        workingFunc();
     });
+
+    $('#Story_Model_Content_Auto_Section_Content').click(function () {
+        workingFunc();
+    });
+
+
+    // Pause or Unpause 
+
+    $('#Pause_Unpause_Circle').click( function () {
+        var pause_or_not = $(this).data('pause');
+        console.log(pause_or_not);
+        if(!pause_or_not) {
+            
+            anime({
+                targets: '#AutoPlay_1 ',
+                points: [
+                    { value: '39.6,4.8 39.6,95.8 10.5,95.8 10.5,4.8' },
+                ],
+                easing: 'linear',
+                duration: 400 ,
+            });
+            anime ({
+                targets: '#AutoPlay_2 ',
+                points: [
+                    { value: '89.6,96.3 90,4.7 60.2,4.5 60.5,96.3 ' },
+                ],
+                easing: 'linear',
+                duration: 400 ,
+            });
+
+            $('.Pause_Unpause_Circle svg').css('transform', 'translate(0,0)');
+
+            $(this).data('pause',true);
+        } else {
+           
+            anime({
+                targets: '#AutoPlay_1 ',
+                points: [
+                    { value: '48.3,26.5 48.3,74.1 10.5,95.8 10.5,4.8 ' },
+                ],
+                easing: 'linear',
+                duration: 400 ,
+            });
+            anime ({
+                targets: '#AutoPlay_2 ',
+                points: [
+                    { value: '89.7,50.4 68.5,38.2 48.6,26.8 48.6,73.8 ' },
+                ],
+                easing: 'linear',
+                duration: 400 ,
+            });
+
+            $('.Pause_Unpause_Circle svg').css('transform', 'translate(2px,0)');
+
+            $(this).data('pause',false);
+        }
+
+    }) ;
+
 
 
     // No Need
@@ -118,40 +176,18 @@ $(document).ready( function () {
 
         count = 0;
         
-
         setTimeout(function () {
             $('#Loading_Container').addClass('d-none');
             $('#Story_Model').removeClass('d-none');
 
             $('#Message_Story_List > li').remove();
-            if(messageArray[count].background_change) {
-                $('#Story_Model').css('background-image','url('+messageArray[count].background_image+')');
-            }
-
-            if(messageArray[count].audio) {
-                audioPlay(messageArray[count].audio_url);
-            }
-    
             
-
-            if(messageArray[count].type == 'message') {
-                build = buildMessage(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
-            } else if (messageArray[count].type == 'think') {
-                build = buildThink(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
-            } else {
-                alert('The Error');
-                return false;
-            }
-            
-            $('#Message_Story_List').append(build);
-            
-            if(navigator.vibrate && messageArray[count].vibrate) {
-                navigator.vibrate(messageArray[count].vibrate_pattern);
-            }
-
-            count++;
+            workingFunc();
         }, 1500);
     });
+
+    
+
     
     
 });
