@@ -237,10 +237,51 @@ $(document).ready( function () {
         isAudioMuted = !$(this).data('muted');
         $(this).data('muted', isAudioMuted);
 
-        console.log("Click");
-        audioArray.forEach( function (e) {
-            e.muted = true;
-        });
+        if(isAudioMuted) {
+
+            var basicTimeline = anime.timeline();
+
+            basicTimeline
+            .add({
+                targets: '#Volume_Option_Open',
+                scale: 0,
+                duration: 100,
+                easing: 'easeInOutBack'
+            })
+            .add({
+                targets: '#Volume_Option_Close line',
+                scale: 1.1,
+                duration: 300,
+                easing: 'easeInOutBack'
+            });
+
+            audioArray.forEach( function (e) {
+                e.muted = true;
+            });
+           
+        } else {
+            var basicTimeline = anime.timeline();
+
+            basicTimeline
+            .add({
+                targets: '#Volume_Option_Close line',
+                scale: 0,
+                duration: 100,
+                easing: 'easeInOutBack'
+            })
+            .add({
+                targets: '#Volume_Option_Open ',
+                scale: 1.1,
+                duration: 300,
+                easing: 'easeInOutBack'
+            });
+
+            audioArray.forEach( function (e) {
+                e.muted = false;
+            });
+        }
+
+        
 
     });
 

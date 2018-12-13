@@ -163,6 +163,11 @@
     transform: translate(2px,0);
 }
 
+/* Volume_Icon */
+.Volume_Option {
+    display: inline-block;
+    width: 2rem;
+}
 
 @media screen and (max-width: 700px) {
     .Story_Model_Container {
