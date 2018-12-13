@@ -8,12 +8,9 @@ $(document).ready( function () {
     if(!navigator.vibrate) {
         alert('Your Web Browser not supported Vibrate');
     }
+   
 
-    var audioPlay = function (Audio_Url) {
-        var audio = new Audio(Audio_Url);
-        audio.play();
-    };
-
+    // Normal List
     var buildNormalMessage = function (Message_Position, Message_Color, Message, Message_Teller) {
         var c = 'Message_'+ Message_Position;
         var word = '<li class="Message_Story '+ c +' zoomIn animated" data-color="" >';
@@ -24,8 +21,7 @@ $(document).ready( function () {
         return word;
     };
 
-
-
+    // Color List
     var buildMessage = function (Message_Position, Message_Color, Message, Message_Teller) {
         var c = 'Message_'+ Message_Position;
         var word = '<li class="Message_Story '+ c +' zoomIn animated" data-color="" >';
@@ -36,6 +32,7 @@ $(document).ready( function () {
         return word;
     };
 
+    // Think Box
     var buildThink = function (Message_Position, Message_Color, Message, Message_Teller) {
       
         var c = 'Message_'+ Message_Position;
@@ -67,6 +64,20 @@ $(document).ready( function () {
     var autoPlay = false;
     // Set Interval 
     var autoPlayCount = "";
+    // Audio Array
+    var audioArray = [];
+    // Audio Mute
+    var isAudioMuted = false;
+
+    var audioPlay = function (Audio_Url) {
+        if(isAudioMuted) {
+            return false;
+        }
+        audioArray.push(new Audio(Audio_Url));
+        audioArray[audioArray.length - 1].play();
+    };
+
+
 
     var workingFunc = function () {
         
@@ -74,6 +85,8 @@ $(document).ready( function () {
             alert('The End');
             return false;
         }
+
+        console.dir(audioArray);
 
         var build = '';
 
@@ -110,7 +123,6 @@ $(document).ready( function () {
        
         count++;
     };
-
     
     $('#Story_Model_Content_Message_Section').click( function () {
         if(!autoPlay) {
@@ -126,7 +138,6 @@ $(document).ready( function () {
 
 
     // Pause or Unpause 
-
     var play = function () {
         anime({
             targets: '#AutoPlay_1 ',
@@ -219,13 +230,43 @@ $(document).ready( function () {
     }) ;
 
 
+    // When CLick Volume Option 
+
+    $('#Volume_Option').click( function () {
+
+        isAudioMuted = !$(this).data('muted');
+        $(this).data('muted', isAudioMuted);
+
+        console.log("Click");
+        audioArray.forEach( function (e) {
+            e.muted = true;
+        });
+
+    });
+
+
+    // When Back Click 
+    $('#Back').click( function () {
+
+        pause();
+        audioArray.forEach( function (e) {
+            e.muted = true;
+        });
+
+        count = 0 ;
+        audioArray = [];
+
+        $('#Story_Model').addClass('d-none');
+
+    });
+
 
     // No Need
-
     $('.More a').click( function () {
         $('#Loading_Container').removeClass('d-none');
 
         count = 0;
+        audioArray = [];
         
         setTimeout(function () {
             $('#Loading_Container').addClass('d-none');
@@ -235,7 +276,7 @@ $(document).ready( function () {
             
             workingFunc();
         }, 1500);
-        
+
     });
 
     
