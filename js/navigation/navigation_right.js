@@ -10,7 +10,6 @@ $(document).ready( function () {
             duration: 500
         });
 
-
     });
 
     // When Close
