@@ -68,6 +68,8 @@ $(document).ready( function () {
     var audioArray = [];
     // Audio Mute
     var isAudioMuted = false;
+    // Vibrate
+    var isOffVibrate = false;
 
     var audioPlay = function (Audio_Url) {
         if(isAudioMuted) {
@@ -86,7 +88,7 @@ $(document).ready( function () {
             return false;
         }
 
-        console.dir(audioArray);
+        // console.dir(audioArray);
 
         var build = '';
 
@@ -117,7 +119,7 @@ $(document).ready( function () {
             $('#Story_Model').css('background-image','url('+messageArray[count].background_image+')');
         }
 
-        if(navigator.vibrate && messageArray[count].vibrate) {
+        if(navigator.vibrate && messageArray[count].vibrate && !isOffVibrate) {
             navigator.vibrate(messageArray[count].vibrate_pattern);
         }
        
@@ -239,9 +241,9 @@ $(document).ready( function () {
 
         if(isAudioMuted) {
 
-            var basicTimeline = anime.timeline();
+            var audio_icon_timeline = anime.timeline();
 
-            basicTimeline
+            audio_icon_timeline
             .add({
                 targets: '#Volume_Option_Open',
                 scale: 0,
@@ -260,9 +262,9 @@ $(document).ready( function () {
             });
            
         } else {
-            var basicTimeline = anime.timeline();
+            var audio_icon_timeline = anime.timeline();
 
-            basicTimeline
+            audio_icon_timeline
             .add({
                 targets: '#Volume_Option_Close line',
                 scale: 0,
@@ -284,6 +286,58 @@ $(document).ready( function () {
         
 
     });
+
+    // When Click Vibrate Option
+    $('#Vibrate_Option').click( function () {
+        var vibrate_condition =  $(this).data('muted');
+        $(this).data('muted', !vibrate_condition);
+
+        if(!vibrate_condition) {
+            // console.log('Pate');
+            isOffVibrate = true;
+
+            var vibrate_icon_timeline = anime.timeline();
+
+            vibrate_icon_timeline
+              .add({
+                  targets: '#Vibrate_Option_Close polyline',
+                  scale: 0,
+                  duration: 300,
+                  easing: 'easeInOutBack'
+              })
+              .add({
+                  targets: '#Vibrate_Option_Open',
+                  rotate: 18,
+                  duration: 100,
+                  easing: 'linear'
+              });
+            
+        } else {
+            // console.log('Phwint');
+            isOffVibrate = false;
+
+            var vibrate_icon_timeline = anime.timeline();
+
+            vibrate_icon_timeline
+              .add({
+                  targets: '#Vibrate_Option_Open',
+                  rotate: 0,
+                  duration: 100,
+                  easing: 'linear'
+              })
+              .add({
+                  targets: '#Vibrate_Option_Close polyline',
+                  scale: 1.2,
+                  duration: 300,
+                  easing: 'easeInOutBack'
+              });
+
+        }
+
+
+      });
+
+
 
 
     // When Back Click 

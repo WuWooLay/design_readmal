@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Read Mal Home Page</title>
+    <meta name="theme-color" content="#000">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/body/body.css">
+    <link rel="stylesheet" href="/css/navigation/navigation.css">
+
+    <link rel="stylesheet" href="/css/main_section/main_section.css">
+    <link rel="stylesheet" href="/css/main_section/loading.css">
+    <link rel="stylesheet" href="/css/main_section/story_model.css">
+    
+    <link rel="stylesheet" href="/css/helper/helper.css">
+    
+    <link rel="icon" href="/favicon.ico"/>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Anime Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <!-- Anime Js End-->
+
+    <!-- Body -->
+    <script src="/js/body/body.js"></script>
+    <!-- Body End-->
+    
+    <!-- Right Navigation -->
+    <script src="/js/navigation/navigation_right.js"></script>
+    <!-- Right Navigation End-->
+
+    
+    <!-- Model Content -->
+    <script src="/js/main_section/story_model.js"></script>
+    <!-- Model Content End-->
+
+    <!-- Main Section -->
+    <script src="/js/main_section/main_section.js"></script>
+    <!-- Main Section End-->
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+
+    <!-- Ionic -->
+    <link href="https://unpkg.com/ionicons@4.4.8/dist/css/ionicons.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.4.8/dist/ionicons.js"></script>
+    <!-- Ionic End-->
+
+    <style>
+        
+        
+    </style>
+
+
+</head>
+<body>
+
+
+    
+
+
+    <script>
+
+        $(document).ready(function () {
+
+                $('#Vibrate_Option').click( function () {
+                  var vibrate_condition =  $(this).data('muted');
+                  $(this).data('muted', !vibrate_condition);
+
+                  if(!vibrate_condition) {
+                      console.log('Pate');
+
+                      var vibrate_icon_timeline = anime.timeline();
+
+                      vibrate_icon_timeline
+                        .add({
+                            targets: '#Vibrate_Option_Close polyline',
+                            scale: 0,
+                            duration: 300,
+                            easing: 'easeInOutBack'
+                        })
+                        .add({
+                            targets: '#Vibrate_Option_Open',
+                            rotate: 18,
+                            duration: 100,
+                            easing: 'linear'
+                        });
+                      
+                  } else {
+                      console.log('Phwint');
+
+                      var vibrate_icon_timeline = anime.timeline();
+
+                      vibrate_icon_timeline
+                        .add({
+                            targets: '#Vibrate_Option_Open',
+                            rotate: 0,
+                            duration: 100,
+                            easing: 'linear'
+                        })
+                        .add({
+                            targets: '#Vibrate_Option_Close polyline',
+                            scale: 1,
+                            duration: 300,
+                            easing: 'easeInOutBack'
+                        });
+
+                  }
+
+
+                });
+
+        });
+
+    </script>
+    
+</body>
+</html>
