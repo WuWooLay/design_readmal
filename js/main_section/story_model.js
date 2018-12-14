@@ -13,7 +13,7 @@ $(document).ready( function () {
     // Normal List
     var buildNormalMessage = function (Message_Position, Message_Color, Message, Message_Teller) {
         var c = 'Message_'+ Message_Position;
-        var word = '<li class="Message_Story '+ c +' zoomIn animated" data-color="" >';
+        var word = '<li class="Message_Story Color_Message '+ c +' zoomIn animated" data-color="'+Message_Color+'" >';
         word += '<span class="Message" "> '+ Message +' </span>';
         word += '<span class="Name" style="color: '+ Message_Color +'"> '+ Message_Teller +' </span>';
         word += '</li>';
@@ -24,7 +24,7 @@ $(document).ready( function () {
     // Color List
     var buildMessage = function (Message_Position, Message_Color, Message, Message_Teller) {
         var c = 'Message_'+ Message_Position;
-        var word = '<li class="Message_Story '+ c +' zoomIn animated" data-color="" >';
+        var word = '<li class="Message_Story Color_Message '+ c +' zoomIn animated" data-color="'+Message_Color+'" >';
         word += '<span class="Message" style="background-color: '+ Message_Color +'"> '+ Message +' </span>';
         word += '<span class="Name" style="color: '+ Message_Color +'"> '+ Message_Teller +' </span>';
         word += '</li>';
@@ -70,6 +70,8 @@ $(document).ready( function () {
     var isAudioMuted = false;
     // Vibrate
     var isOffVibrate = false;
+    // Night is?
+    var isNightModeCheck = false;
 
     var audioPlay = function (Audio_Url) {
         if(isAudioMuted) {
@@ -98,7 +100,11 @@ $(document).ready( function () {
 
         
         if(messageArray[count].type == 'message') {
-            build = buildMessage(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
+            if(isNightModeCheck) {
+                build = buildNormalMessage(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
+            } else {
+                build = buildMessage(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
+            }
         } else if (messageArray[count].type == 'think') {
             build = buildThink(messageArray[count].position, messageArray[count].color, messageArray[count].message , messageArray[count].name  );
         } else {
@@ -337,7 +343,71 @@ $(document).ready( function () {
 
       });
 
+    
+    // When Night Mode Is On
+    $('#Night_Mode').click( function () {
+               
+        var isNightMode = $(this).data('muted');
+        $(this).data('muted', !isNightMode);
+        if(!isNightMode) {
+            isNightModeCheck = true;
+            var nigthMode =  anime.timeline();
+                nigthMode
+                .add({
+                    targets: '#San_x5F_Tips',
+                    scale: 0,
+                    duration: 200,
+                    easing: 'easeInOutBack'
+                })
+                .add({
+                    targets: '#Earth_x5F_Moon',
+                    d: [
+                        { value: 'M42.6,51.6c6,16.2,34.5,21.6,18.3,27.7s-34.2-2.2-40.2-18.4s2.2-34.2,18.4-40.2S36.6,35.5,42.6,51.6z' },
+                    ],
+                    easing: 'linear',
+                    duration: 200 ,
+                }).add({
+                    targets: '#Star_x5f_Tips',
+                    scale: 1,
+                    duration: 300,
+                    easing: 'easeInOutBack'
+                });
 
+                $.each($('.Color_Message'), function (k,v) {
+                   $(v)[0].children[0].style="";
+                });
+
+        } else {
+            isNightModeCheck = !isNightModeCheck;
+            var nigthMode =  anime.timeline();
+                nigthMode
+                .add({
+                    targets: '#Star_x5f_Tips',
+                    scale: 0,
+                    duration: 200,
+                    easing: 'easeInOutBack'
+                })
+                .add({
+                    targets: '#Earth_x5F_Moon',
+                    d: [
+                        { value: 'M81.1,39.4c6,16.2-4,33.9-20.2,39.9s-34.2-2.2-40.2-18.4s2.2-34.2,18.4-40.2S75.1,23.2,81.1,39.4z' },
+                    ],
+                    easing: 'linear',
+                    duration: 200 ,
+                }).add({
+                    targets: '#San_x5F_Tips',
+                    scale: 1,
+                    duration: 300,
+                    easing: 'easeInOutBack'
+                });
+
+                $.each($('.Color_Message'), function (k,v) {
+                    $(v)[0].children[0].style.backgroundColor = $(v).data('color');
+                });
+        }
+
+
+    });
 
 
     // When Back Click 

@@ -164,10 +164,11 @@
 }
 
 /* Volume_Icon */
-.Volume_Option, .Vibrate_Option, .Back {
+.Volume_Option, .Vibrate_Option, .Back, .Night_Mode {
     display: inline-block;
     width: 2rem;
     position: relative;
+    margin-right: 5px;
 }
 
 .Back svg {
