@@ -10,6 +10,7 @@
 }
 .Admin_Message_Show_Container > .Opacity {
     width: 100%;
+    min-height: 100%;
     background-color: rgba(0,0,0, 0.65);
 }
 
@@ -31,6 +32,7 @@
     padding: 0.2rem 0.5rem 0.4rem 0.5rem;
     color: white;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .Admin_Message_Show_Ul .Li > .Message >.Left {
@@ -63,7 +65,7 @@
     float: right;
     margin-left: 3px;
 }
-.NameAndEditContainer > .bottom {
+.NameAndEditContainer > .buttom {
     border: 1px solid #ddd;
     width: 1.7rem;
     height: 1.7rem;
@@ -71,8 +73,19 @@
     border-radius: 1rem;
     display: inline-block;
     cursor: pointer;
-    background-color: #ffffff;
+    background-color: #292323;
     color: #ababab;
+}
+.NameAndEditContainer > .buttom:hover {
+    background-color: #fff;
+}
+.NameAndEditContainer > .buttom.active {
+    color: #89afef;
+}
+.NameAndEditContainer > .buttom.cursor {
+    background-color: #007bff;
+    border: 1px solid #ffffff;
+    color: #ffffff;
 }
 
 .Admin_Message_Show_Ul .Li:after {
@@ -80,6 +93,30 @@
     display: block;
     clear: both;
 }
+
+
+.Folder, .Audio > ul {
+    list-style: none;
+    padding: 0;
+}
+.Folder > li, .Audio > ul > li {
+    padding: 0.3rem 0.3rem;
+    border-radius: 2px;
+}
+
+.Folder > li:hover, .Audio > ul > li:hover {
+    background-color: #efefef;
+
+}
+.Folder > li > i.icon {
+    color: #ffcf43;
+}
+
+.Folder .Folder_Loading {
+    width: 2rem;
+    display: inline-block;
+}
+
 
 /* width */
 ::-webkit-scrollbar {

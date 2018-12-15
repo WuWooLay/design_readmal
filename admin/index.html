@@ -109,7 +109,7 @@
         <div class="row">
 
             <!-- First COlumn -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                 
              
 
@@ -131,12 +131,12 @@
 
                 <!-- Add Message -->
                 <div class="card mb-3">
-                        <div class="card-body pr-4 pl-4 pt-1 pb-1">
+                        <div class="card-body">
                             <form>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" min="6" max="6" id="PasswordAdd" placeholder="">
+                                        <input type="text" class="form-control"  id="" placeholder="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary"> စာထည့္မည္။ </button>
+                                    <button type="button" class="btn btn-primary"> စာထည့္မည္။ </button>
                             </form>
                         </div>
                 </div>
@@ -147,14 +147,25 @@
                         <div class="card-body">
                             <form>
                                     <div class="form-group">
-                                        <label for="NameAdd"> နာမည္  </label>
+                                        <label for="NameAdd"> လူထည့္ရန္  </label>
                                         <input type="text" class="form-control" id="NameAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
                                     </div>
                                     <div class="form-group">
                                         <label for="PasswordAdd"> Hax Color Code  </label>
                                         <input type="number" class="form-control" min="6" max="6" id="PasswordAdd" placeholder="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary"> ထည့္မည္။ </button>
+                                    <div class="mb-2">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                    <input checked type="radio" id="Left_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <label class="custom-control-label Pointer" for="Left_Radio">Left</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="Right_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <label class="custom-control-label Pointer" for="Right_Radio">Right</label>
+                                            </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary"> ထည့္မည္။ </button>
+                                    <button type="button" class="btn btn-outline-success"> ClearFix </button>
                             </form>
                         </div>
                 </div>
@@ -164,7 +175,7 @@
             <!-- First COlumn End-->
            
             <!-- Second Column  -->
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
 
                 <!-- Message Show -->
                 <div class="Admin_Message_Show_Container" id="Admin_Message_Show_Container" style="background-image:url('/images/wall_paper/Evil_With_Sword_in_Dark.jpg')">
@@ -173,7 +184,7 @@
                         <!-- Ul List  -->
                         <ul class="Admin_Message_Show_Ul">
     
-                            <li class="Li">
+                            <li class="Li" id="">
                                 <div class="Message"> 
                                     <span class="Left">
                                             Message 
@@ -182,13 +193,30 @@
                                 <div class="NameAndEdit">
                                     <div class="NameAndEditContainer Left">
                                             <span class="Name"> Name </span>
-                                            <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                            <span class="bottom"> 2 </span>
-                                            <span class="bottom"> 3 </span>
+                                            <span class="buttom active"> <i class="icon ion-ios-cellular"></i> </span>
+                                            <span class="buttom active"> <i class="icon ion-ios-image"></i> </span>
+                                            <span class="buttom active"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                            <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
                                     </div>
                                 </div>
                             </li>
     
+                            <li class="Li" id="">
+                                    <div class="Message "> 
+                                        <span class="Right">
+                                            Message 
+                                        </span>
+                                    </div>
+                                    <div class="NameAndEdit">
+                                        <div class="NameAndEditContainer Right">
+                                                <span class="Name"> Name </span>
+                                                <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
+                                                <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
+                                                <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                                <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
+                                    </div>
+                            </li>
+
                             <li class="Li">
                                     <div class="Message "> 
                                         <span class="Right">
@@ -198,126 +226,13 @@
                                     <div class="NameAndEdit">
                                         <div class="NameAndEditContainer Right">
                                                 <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
+                                                <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
+                                                <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
+                                                <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                                <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
+                                    </div>
                             </li>
                             
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
-                            <li class="Li">
-                                    <div class="Message "> 
-                                        <span class="Right">
-                                            Message 
-                                        </span>
-                                    </div>
-                                    <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
-                                                <span class="Name"> Name </span>
-                                                <span class="bottom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="bottom"> 2 </span>
-                                                <span class="bottom"> 3 </span>
-                                        </div>
-                                    </di>
-                            </li>
-    
                         </ul>
                         <!-- Ul List End -->
                     </div>
@@ -329,16 +244,17 @@
             <!-- Second Column End -->
 
             <!-- Third Column -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-2">
                     <!-- Center Text Folder -->
                     <div class="card mb-3">
                             <div class="card-body">
                                         <h6> Vibrate </h6>
                                         <form>
                                                 <div class="form-group">
-                                                    <textarea class="form-control" id="Vibrate" rows="3"></textarea>
+                                                  <input type="text" class="form-control"  id="" placeholder="">
                                                 </div>
-                                                <button type="submit" class="btn btn-primary"> ထည့္မည္။ </button>
+                                                <button type="button" class="btn btn-primary"> ထည့္မည္။ </button>
+                                                <button type="button" class="btn btn-outline-success"> ClearFix </button>
                                         </form>
                             </div>
                         </div>
@@ -353,7 +269,7 @@
                                             <div class="form-group">
                                                 <textarea class="form-control" id="Vibrate" rows="3"></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-primary"> ထည့္မည္။ </button>
+                                            <button type="button" class="btn btn-primary"> ထည့္မည္။ </button>
                                     </form>
 
                                     <ul class="list-group mt-2" id="centerText">
@@ -368,12 +284,50 @@
             <!-- Third Column End-->
 
             <!-- Fourth Column -->
-            <div class="col-md-2">
+            <div class="col-md-2 mb-2">
                 
                     <!-- Audio Folder -->
                     <div class="card mb-3">
                         <div class="card-body">
-                                    <h6> Audio </h6>
+                                    <h6> Audio  
+                                        <button id="AudioFolderBack" type="button" class="btn btn-sm btn-outline-primary">
+                                            Back 
+                                        </button> 
+                                    </h6>
+
+                                    <!--Audio Folder List -->
+                                    <ul class="Folder" id="Audio">
+                                            <li class="Pointer">
+                                                    <i class="icon ion-md-folder"></i> 
+                                                    <span> Ghost </span>
+                                                    <span class="Folder_Loading d-none">
+                                                            <img src="/images/loading/ghost_loading.svg" alt="">
+                                                    </span>
+                                            </li>
+                                            <li class="Pointer">
+                                                    <i class="icon ion-md-folder"></i>
+                                                    <span> Romance </span>
+                                                    <span class="Folder_Loading d-none">
+                                                            <img src="/images/loading/ghost_loading.svg" alt="">
+                                                    </span>
+                                            </li>
+                                    </ul>
+                                    <!--Audio Folder List End -->
+
+                                    <!--Audio Inside Folder List -->
+                                    <ul class="Folder d-none" id="AudioInside">
+                                            
+                                    </ul>
+                                    <!--Audio Folder List End -->
+
+                                    <!-- Audio List -->
+                                    <div class="Audio d-none" id="Audio_List">
+                                        <ul>
+                                            
+                                        </ul>
+                                    </div>
+                                    <!-- Audio List End-->
+                                    
                         </div>
                     </div>
                     <!-- Audio Folder End -->
@@ -400,19 +354,98 @@
         
         $(document).ready( function () {
             
-           var hash = function () {
-                var date = moment().format('D,M,YYYY,H:mm:ss');
+           var hash = function (Message) {
+                var date = moment().format(Message);
                 return CryptoJS.HmacMD5(date, "WuWoo").toString();
            };
 
-           console.log(hash());
 
             $("#list").click( function () {
                 alert('Click');
 
-
-                console.log(new Date().uniqueId());
+                console.log(hash());
             });
+
+
+            // Create Audio Folder
+            var create_audio_folder = function (FolderName) {
+
+                return  $('<li>', {class:'Pointer'})
+                .append(
+                    $('<i>', {class: 'icon ion-md-folder'})
+                )
+                .append(
+                    $('<span>').html(' ' + FolderName + ' ' )
+                )
+                .append(
+                    $('<span>', {class: 'Folder_Loading d-none'})
+                    .append(
+                        $('<img>', { src: '/images/loading/ghost_loading.svg'})
+                    )
+                ).click(function () {
+                    // Search Sound In Folder 
+                    console.dir($(this));
+                    var loader = $(this)["0"].children[2];
+                    console.dir(loader);
+                    $(loader).removeClass('d-none');
+
+                    setTimeout( function () {
+                        $(loader).addClass('d-none');
+
+                        // If Get Audio File
+                        $('#Audio_List ul li').remove();
+                        $('#Audio_List ul').append(create_audio_file('Knock'));
+                        $('#Audio_List ul').append(create_audio_file('Voice'));
+                        $('#Audio_List ul').append(create_audio_file('Heart'));
+                        $('#Audio_List').removeClass('d-none');
+                    }, 1000);
+                });
+               
+            }
+
+
+            // Create Audio File
+            var create_audio_file = function (FileName) {
+
+                return $('<li>', {class: 'Pointer'})
+                .append(
+                    $('<a>', {href: '#!'})
+                    .append(
+                        $('<i>', {class: 'icon ion-ios-musical-notes'})
+                    )
+                    .append(' ' + FileName + ' ')
+                );
+            }
+
+            //Audio Folder Li Click
+            $('#Audio li').click( function () {
+                var thiS = $(this);
+                var loader = thiS["0"].children[2];
+
+                $(loader).removeClass('d-none');
+
+                setTimeout(function () {
+                    $(loader).addClass('d-none');
+
+                    // Parent Folder Hide
+                    $('#Audio').addClass('d-none');
+
+                    // Get Array Folder
+                    $('#AudioInside li').remove();
+                    $('#AudioInside').append(create_audio_folder('Door'));
+                    $('#AudioInside').append(create_audio_folder('Voice'));
+                    $('#AudioInside').removeClass('d-none');
+                }, 1000);
+            });
+
+            // Audio Folder Back
+            $('#AudioFolderBack').click( function () {
+                $('#AudioInside').addClass('d-none');
+                $('#Audio').removeClass('d-none');
+                $('#Audio_List ul li').remove();
+            });
+
+
         });
 
     </script>
