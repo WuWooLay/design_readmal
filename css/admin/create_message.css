@@ -1,0 +1,87 @@
+.Admin_Message_Show_Container {
+    height: calc(100vh - 90px );
+    overflow-y: scroll;
+    border: 1px solid #dfdfdf;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+}
+.Admin_Message_Show_Container > .Opacity {
+    width: 100%;
+    background-color: rgba(0,0,0, 0.65);
+}
+
+.Admin_Message_Show_Ul {
+    list-style-type: none;
+    padding: 0.4rem 0.3rem;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+}
+.Admin_Message_Show_Ul .Li{
+    margin-bottom: 1rem;
+}
+.Admin_Message_Show_Ul .Li > .Message > span {
+    max-width: 80%;
+    background-color: rgba(0,0,0, 0.65);
+    display: inline-block;
+    border-radius: 1rem;
+    padding: 0.2rem 0.5rem 0.4rem 0.5rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.Admin_Message_Show_Ul .Li > .Message >.Left {
+    float: left;
+    border-radius: 1rem 1rem 1rem 0rem;
+}
+.Admin_Message_Show_Ul .Li > .Message >.Right {
+    float: right;
+    border-radius: 1rem 1rem 0rem 1rem;
+}
+
+.Admin_Message_Show_Ul .Li > .NameAndEdit:before {
+    content: "";
+    display: block;
+    clear: both;
+}
+.NameAndEditContainer.Left {
+    float:left;
+}
+.NameAndEditContainer.Right {
+    float:right;
+}
+.NameAndEditContainer  {
+    padding-top: 0.5rem;
+}
+.NameAndEditContainer > .Name {
+    color: #fff;
+}
+.NameAndEditContainer.Right > .Name {
+    float: right;
+    margin-left: 3px;
+}
+.NameAndEditContainer > .bottom {
+    border: 1px solid #ddd;
+    width: 1.7rem;
+    height: 1.7rem;
+    text-align: center;
+    border-radius: 1rem;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #ababab;
+}
+
+.Admin_Message_Show_Ul .Li:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.4rem;
+}
