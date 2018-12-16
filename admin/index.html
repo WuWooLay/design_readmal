@@ -193,6 +193,7 @@
                                 <div class="NameAndEdit">
                                     <div class="NameAndEditContainer Left">
                                             <span class="Name"> Name </span>
+                                            <span class="buttom active"> <i class="icon ion-md-play"></i> </span>
                                             <span class="buttom active"> <i class="icon ion-ios-cellular"></i> </span>
                                             <span class="buttom active"> <i class="icon ion-ios-image"></i> </span>
                                             <span class="buttom active"> <i class="icon ion-ios-musical-notes"></i> </span>
@@ -210,6 +211,7 @@
                                     <div class="NameAndEdit">
                                         <div class="NameAndEditContainer Right">
                                                 <span class="Name"> Name </span>
+                                                <span class="buttom"> <i class="icon ion-md-play"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
@@ -219,18 +221,19 @@
 
                             <li class="Li">
                                     <div class="Message "> 
-                                        <span class="Right">
+                                        <span class="Center">
                                             Message 
                                         </span>
                                     </div>
                                     <div class="NameAndEdit">
-                                        <div class="NameAndEditContainer Right">
+                                        <div class="NameAndEditContainer Center">
                                                 <span class="Name"> Name </span>
+                                                <span class="buttom"> <i class="icon ion-md-play"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
                                                 <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
                                                 <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
-                                    </div>
+                                       </div>
                             </li>
                             
                         </ul>
@@ -335,8 +338,45 @@
                     <!-- Image Folder -->
                     <div class="card">
                             <div class="card-body">
-                                        <h6> Background Image </h6>
+                                        <h6> Bg Image
+                                                <button id="ImageFolderBack" type="button" class="btn btn-sm btn-outline-primary">
+                                                        Back 
+                                                </button> 
+                                        </h6>
+
+                                        <!-- Image Folder List -->
+                                        <ul class="Folder" id="ImageFolder">
+                                                <li class="Pointer">
+                                                        <i class="icon ion-md-folder"></i> 
+                                                        <span> Ghost </span>
+                                                        <span class="Folder_Loading d-none">
+                                                                <img src="/images/loading/ghost_loading.svg" alt="">
+                                                        </span>
+                                                </li>
+                                                <li class="Pointer">
+                                                        <i class="icon ion-md-folder"></i>
+                                                        <span> Romance </span>
+                                                        <span class="Folder_Loading d-none">
+                                                                <img src="/images/loading/ghost_loading.svg" alt="">
+                                                        </span>
+                                                </li>
+                                        </ul>
+
+                                        <!-- Image Folder  Inside Folder List -->
+                                        <ul class="Folder d-none" id="ImageFolderInside">
+                                            
+                                        </ul>
+                                        <!--Image Folder  Folder List End -->
+
+                                        <!-- Audio List -->
+                                        <div class="row" id="ImageFolder_List">
+                                            
+                                        </div>
+                                        <!-- Audio List End-->
+                                        
+
                             </div>
+
                     </div>
                     <!-- Image Folder End -->
         
@@ -403,7 +443,6 @@
                
             }
 
-
             // Create Audio File
             var create_audio_file = function (FileName) {
 
@@ -445,6 +484,78 @@
                 $('#Audio_List ul li').remove();
             });
 
+            // Create Bg Image Folder 
+            var create_bgImg_folder = function (FolderName) {
+
+                return  $('<li>', {class:'Pointer'})
+                .append(
+                    $('<i>', {class: 'icon ion-md-folder'})
+                )
+                .append(
+                    $('<span>').html(' ' + FolderName + ' ' )
+                )
+                .append(
+                    $('<span>', {class: 'Folder_Loading d-none'})
+                    .append(
+                        $('<img>', { src: '/images/loading/ghost_loading.svg'})
+                    )
+                ).click(function () {
+                    // Search Sound In Folder 
+                    console.dir($(this));
+                    var loader = $(this)["0"].children[2];
+                    console.dir(loader);
+                    $(loader).removeClass('d-none');
+
+                    setTimeout( function () {
+                        $(loader).addClass('d-none');
+
+                        // If Get Audio File
+                        $('#ImageFolder_List div').remove();
+                        $('#ImageFolder_List').append(create_bgImg_file('/images/wall_paper/Evil_With_Sword_in_Dark.jpg'));
+                        $('#ImageFolder_List').append(create_bgImg_file('/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg'));
+                        $('#ImageFolder_List').removeClass('d-none');
+                    }, 1000);
+                });
+
+            }
+
+            // Create Bg Image File
+            var create_bgImg_file = function (FileNameUrl) {
+                
+                return $('<div>', {class:'col-6 ImageDiv', style: "background-image:url('"+ FileNameUrl +"')"})
+                .append(
+                    ' '
+                );
+            }
+
+            // Image Folder Li Click
+            $('#ImageFolder li').click( function () {
+                    var thiS = $(this);
+                    var loader = thiS["0"].children[2];
+
+                    $(loader).removeClass('d-none');
+
+                    setTimeout(function () {
+                        $(loader).addClass('d-none');
+
+                        // Parent Folder Hide
+                        $('#ImageFolder').addClass('d-none');
+
+                        // Get Array Folder
+                        $('#ImageFolderInside li').remove();
+                        $('#ImageFolderInside').append(create_bgImg_folder('House'));
+                        $('#ImageFolderInside').append(create_bgImg_folder('Fields'));
+                        $('#ImageFolderInside').append(create_bgImg_folder('Door'));
+                        $('#ImageFolderInside').removeClass('d-none');
+                    }, 1000);
+                });
+
+            // Image Folder Back
+            $('#ImageFolderBack').click( function () {
+                $('#ImageFolderInside').addClass('d-none');
+                $('#ImageFolder').removeClass('d-none');
+                $('#ImageFolder_List div').remove();
+            });
 
         });
 

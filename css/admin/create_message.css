@@ -44,6 +44,14 @@
     border-radius: 1rem 1rem 0rem 1rem;
 }
 
+.Admin_Message_Show_Ul .Li > .Message >.Center {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
+    border: 1px solid #ffffff;
+}
+
 .Admin_Message_Show_Ul .Li > .NameAndEdit:before {
     content: "";
     display: block;
@@ -54,6 +62,9 @@
 }
 .NameAndEditContainer.Right {
     float:right;
+}
+.NameAndEditContainer.Center {
+    text-align: center;
 }
 .NameAndEditContainer  {
     padding-top: 0.5rem;
@@ -115,6 +126,21 @@
 .Folder .Folder_Loading {
     width: 2rem;
     display: inline-block;
+}
+
+.ImageDiv {
+    cursor: pointer;
+    min-height: 8rem;
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border: 2px solid white;
+    border-radius: 3px;
+}
+
+.ImageDiv:hover {
+    opacity: 0.8;
 }
 
 
