@@ -43,17 +43,38 @@ $(document).ready( function () {
         return word;
     };
 
+    // {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg',  audio: false, audio_url: ''},
     var messageArray = [
-        {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg',  audio: false, audio_url: ''},
-        {id: '2', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ေအးဆုိ', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
-        {id: '3', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ခုခ်ိန္ဆုိ ဘယ္သူ့မွလည္းရွိမွာမဟုတ္သးဘူး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '4', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'ေတြ့လားသားေလး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: true, background_image: '/images/story_card/ghost_door.jpg', audio: true, audio_url: '/audio/ghost/creaking_door.mp3'},
-        {id: '5', name: 'ႏွင္းႏွင္း', position: 'Right', type: 'message', message: 'နင္တုိ့ကလည္းဟာ ဘာလုိ့ တံခါးအရင္မေခါက္တာလဲ..', color: '#dc3545', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '6', name: ' ', position: 'Center', type: 'think', message: 'ဒီလိုညၾကီးမွာ ကားပ်က္သြားတဲ့ သူငယ္ခ်င္းေတြအဖုိ့ေတာ့ ......  ', color: '#43a047', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '7', name: 'ေက်ာ္ေက်ာ္', position: 'Left', type: 'message', message: 'အာ့ေၾကာင့္ ငါေျပာသားပဲ မင္းတုိ့ အတြဲသာ ညဘက္ၾကီး ခရီးသြားဖို့ မေျပာခဲ့ရင္ ဘာမွျဖစ္မွာမဟုတ္ဘူး', color: '#0b93f6', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '8', name: 'ႏွင္းႏွင္း', position: 'Right', type: 'message', message: ' ရွဴး တုိးတုိးလုပ္ပါဟာ တျခားသူေတြ ၾကားရင္.. ငါေၾကာက္တယ္ဟ ', color: '#dc3545', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '', audio: false, audio_url: ''},
-        {id: '9', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ခ်စ္ရာ အရမ္းလည္း မေၾကာက္ပါနဲ ့ ကိုကိုရွိတယ္ အဟဲ...', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/ghost_bell.mp3'},
+        {id: '1', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/house/house_1.jpg',  audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
+        {id: '2', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက အခုဘယ္မွာမုိ့လုိ့လဲ', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/theme/theme_1.mp3'},
+        {id: '3', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'သမီးတုိ့ အရင္ေနခဲ့တယ့္ အိမ္ကိုေရာက္ေနတာ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '4', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက ဘာလုိ့အဲ့ကို ေရာက္ေနတာလဲ ?', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '5', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'သမီးမွာ အရင္အိမ္ေဟာင္းက ေသာ့ရွိေသးတယ္ေလ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '6', name: 'အေမ', position: 'Right', type: 'message', message: 'အဲ့အိမ္မွာ ဘာသြားလုပ္တာလဲ ?', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '7', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ေမေမ ဘာလုိ့ ဒီပါတ္၀န္းက်င္မွာ အရင္ကထက္ရွဳပ္ပြေနတာလဲ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '8', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/theme/theme_1.mp3'},
+        {id: '9', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ခဏေလး သမီးအိမ္ထဲ၀င္ၾကည့္လိုက္ဦးမယ္ ..။', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: true, background_image: '/images/bg_images/ghost/door/door_1.jpg', audio: true, audio_url: '/audio/ghost/door/door_1.mp3'},
+        {id: '10', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အိမ္ထဲမွာ ေမွာင္မဲေနတာပဲ မီးေတြပ်က္ေနတာလား မသိဘူး....', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '', audio: true, audio_url: '/audio/ghost/female_scary/female_scary_low_1.mp3'},
+        {id: '11', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
+        {id: '12', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ခဏေလး အေမ အေရွ့မွာဘာေတြလဲမသိဘူး', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/bats/bats_1.jpg', audio: true, audio_url: '/audio/ghost/bats_sound/bats_sound_1.mp3'},
+        {id: '13', name: 'ေသာ္တာ', position: 'Center', type: 'think', message: 'ဘယ္ကဘယ္လို လင္းႏုိ ့ ေတြေရာက္လာတာလဲမသိဘူး..... ငါစိတ္ထဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/bats/bats_1.jpg', audio: true, audio_url: '/audio/ghost/bats_sound/bats_sound_1.mp3'},
     ];
+
+    var audioInitialArray = [
+        {id: 1, url: "/audio/ghost/phone_ring/pr_1.mp3"},
+        {id: 2, url: "/audio/ghost/female_scary/female_scary_low_1.mp3"},
+        {id: 3, url: "/audio/ghost/theme/theme_1.mp3"},
+        {id: 4, url: "/audio/ghost/door/door_1.mp3"},
+        {id: 5, url: "/audio/ghost/bats_sound/bats_sound_1.mp3"},
+    ]; 
+
+    
+
+    var makeAudio = function (url) {
+        this.status = false;
+        this.url = url;
+        this.audio = new Audio(url);
+    };
 
 
     // Message Array Count
@@ -72,13 +93,24 @@ $(document).ready( function () {
     var isOffVibrate = false;
     // Night is?
     var isNightModeCheck = false;
+    
 
     var audioPlay = function (Audio_Url) {
         if(isAudioMuted) {
             return false;
         }
-        audioArray.push(new Audio(Audio_Url));
-        audioArray[audioArray.length - 1].play();
+
+        
+        audioArray.map(function(v,k) {
+            if(v.url == Audio_Url) {
+                v.audio.play();
+            }
+        });
+
+        
+        // audioArray.push(new Audio(Audio_Url));
+        // audioArray[audioArray.length - 1].play();
+        
     };
 
 
@@ -91,12 +123,7 @@ $(document).ready( function () {
         }
 
         // console.dir(audioArray);
-
         var build = '';
-
-        if(messageArray[count].audio) {
-            audioPlay(messageArray[count].audio_url);
-        }
 
         
         if(messageArray[count].type == 'message') {
@@ -113,7 +140,7 @@ $(document).ready( function () {
         }
         $('#Message_Story_List').append(build);
 
-
+        
 
         $('#Story_Model_Content_Message_Section').stop().animate(
         {
@@ -127,6 +154,10 @@ $(document).ready( function () {
 
         if(navigator.vibrate && messageArray[count].vibrate && !isOffVibrate) {
             navigator.vibrate(messageArray[count].vibrate_pattern);
+        }
+
+        if(messageArray[count].audio) {
+            audioPlay(messageArray[count].audio_url);
         }
        
         count++;
@@ -263,9 +294,11 @@ $(document).ready( function () {
                 easing: 'easeInOutBack'
             });
 
-            audioArray.forEach( function (e) {
-                e.muted = true;
+            audioArray.map(function(v,k) {
+                     console.log(v);
+                     v.audio.muted = true;
             });
+           
            
         } else {
             var audio_icon_timeline = anime.timeline();
@@ -284,9 +317,15 @@ $(document).ready( function () {
                 easing: 'easeInOutBack'
             });
 
-            audioArray.forEach( function (e) {
-                e.muted = false;
+
+            audioArray.map(function(v,k) {
+                     console.log(v);
+                     v.audio.muted = false;
             });
+            
+            // audioArray.forEach( function (e) {
+            //     e.muted = false;
+            // });
         }
 
         
@@ -341,7 +380,7 @@ $(document).ready( function () {
         }
 
 
-      });
+    });
 
     
     // When Night Mode Is On
@@ -414,8 +453,9 @@ $(document).ready( function () {
     $('#Back').click( function () {
 
         pause();
-        audioArray.forEach( function (e) {
-            e.muted = true;
+
+        audioArray.map(function(v,k) {
+            v.audio.muted = true;
         });
 
         count = 0 ;
@@ -434,9 +474,20 @@ $(document).ready( function () {
         audioArray = [];
         
         setTimeout(function () {
+
+            audioInitialArray.map(function (v, k) {
+                // console.log(v.url);
+                audioArray.push(new makeAudio(v.url));
+                audioArray[k].audio.oncanplaythrough = function () {
+                    audioArray[k].status = true;
+                };
+            });
+
+
+            
+
             $('#Loading_Container').addClass('d-none');
             $('#Story_Model').removeClass('d-none');
-
             $('#Message_Story_List > li').remove();
             
             workingFunc();

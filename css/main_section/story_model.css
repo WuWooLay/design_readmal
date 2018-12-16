@@ -54,6 +54,7 @@
     /* background-color: red; */
     overflow-x: hidden;
     overflow-y: scroll;
+    scrollbar-width: thin;
 }
 
 .Message_Small_Scroll_Container {
