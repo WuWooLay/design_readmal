@@ -76,7 +76,7 @@
     float: right;
     margin-left: 3px;
 }
-.NameAndEditContainer > .buttom {
+.NameAndEditContainer > .button {
     border: 1px solid #ddd;
     width: 1.7rem;
     height: 1.7rem;
@@ -86,14 +86,15 @@
     cursor: pointer;
     background-color: #292323;
     color: #ababab;
+    margin: 0 2px;
 }
-.NameAndEditContainer > .buttom:hover {
+.NameAndEditContainer > .button:hover {
     background-color: #fff;
 }
-.NameAndEditContainer > .buttom.active {
+.NameAndEditContainer > .button.active {
     color: #89afef;
 }
-.NameAndEditContainer > .buttom.cursor {
+.NameAndEditContainer > .button.cursor {
     background-color: #007bff;
     border: 1px solid #ffffff;
     color: #ffffff;

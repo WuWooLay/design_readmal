@@ -43,6 +43,10 @@
     <script src="/js/main_section/story_model.js"></script>
     <!-- Model Content End-->
 
+     <!-- Model Content -->
+     <script src="/js/admin/create_message.js"></script>
+     <!-- Model Content End-->
+
     <!-- Main Section -->
     <script src="/js/main_section/main_section.js"></script>
     <!-- Main Section End-->
@@ -114,8 +118,9 @@
              
 
                 <!-- Show List And Update -->
-                <ul class="list-group mb-3 ">
-                        <li class="list-group-item text-white" id="list" style="background-color:#2cc34e" data-color="#2cc34e">
+                <ul class="list-group mb-3 " id="UserListShow">
+
+                        <!-- <li class="list-group-item text-white" id="list" style="background-color:#2cc34e" data-color="#2cc34e">
                             <div class="row">
                                     <div class="col-8">
                                             <button type="button" class="btn btn-outline-light  btn-block Update_Name" data-id="" data-color=#2cc34e">       ေမ </button>
@@ -125,7 +130,8 @@
                                                    <button class="btn btn-light btn-sm Update_Color"  data-id="" data-color=#2cc34e"> #2cc34e </button>
                                     </div>
                             </div>
-                        </li>
+                        </li> -->
+                        
                 </ul>
                 <!-- Show List And Update End -->
 
@@ -145,27 +151,29 @@
                 <!-- Add Name -->
                 <div class="card ">
                         <div class="card-body">
-                            <form>
+                            <form id="AddNameForm">
                                     <div class="form-group">
                                         <label for="NameAdd"> လူထည့္ရန္  </label>
                                         <input type="text" class="form-control" id="NameAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
                                     </div>
                                     <div class="form-group">
-                                        <label for="PasswordAdd"> Hax Color Code  </label>
-                                        <input type="number" class="form-control" min="6" max="6" id="PasswordAdd" placeholder="">
+                                        <label for="HexCodeAdd"> Hex Color Code  </label>
+                                        <input type="number" class="form-control" id="HexCodeAdd" placeholder="">
                                     </div>
                                     <div class="mb-2">
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                    <input checked type="radio" id="Left_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <input value="Left" checked type="radio" id="Left_Radio" name="Position_Radio" class="custom-control-input">
                                                     <label class="custom-control-label Pointer" for="Left_Radio">Left</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="Right_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <input value="Right" type="radio" id="Right_Radio" name="Position_Radio" class="custom-control-input">
                                                     <label class="custom-control-label Pointer" for="Right_Radio">Right</label>
                                             </div>
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary"> ထည့္မည္။ </button>
-                                    <button type="button" class="btn btn-outline-success"> ClearFix </button>
+                                    <div>
+                                        <button type="button" id="AddNameFormClick" class="btn mt-2 btn-outline-primary"> ထည့္မည္။ </button>
+                                        <button type="button" id="AddNameFormClear" class="btn mt-2 btn-outline-success"> ClearFix </button>
+                                    </div>
                             </form>
                         </div>
                 </div>
@@ -182,7 +190,7 @@
                     
                     <div class="Opacity">
                         <!-- Ul List  -->
-                        <ul class="Admin_Message_Show_Ul">
+                        <ul class="Admin_Message_Show_Ul" id="Admin_Message_Show_Ul">
     
                             <li class="Li" id="">
                                 <div class="Message"> 
@@ -193,11 +201,11 @@
                                 <div class="NameAndEdit">
                                     <div class="NameAndEditContainer Left">
                                             <span class="Name"> Name </span>
-                                            <span class="buttom active"> <i class="icon ion-md-play"></i> </span>
-                                            <span class="buttom active"> <i class="icon ion-ios-cellular"></i> </span>
-                                            <span class="buttom active"> <i class="icon ion-ios-image"></i> </span>
-                                            <span class="buttom active"> <i class="icon ion-ios-musical-notes"></i> </span>
-                                            <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
+                                            <span class="button active"> <i class="icon ion-md-play"></i> </span>
+                                            <span class="button active"> <i class="icon ion-ios-cellular"></i> </span>
+                                            <span class="button active"> <i class="icon ion-ios-image"></i> </span>
+                                            <span class="button active"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                            <span class="button text-danger"> <i class="icon ion-md-close"></i> </span>
                                     </div>
                                 </div>
                             </li>
@@ -211,11 +219,11 @@
                                     <div class="NameAndEdit">
                                         <div class="NameAndEditContainer Right">
                                                 <span class="Name"> Name </span>
-                                                <span class="buttom"> <i class="icon ion-md-play"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
-                                                <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
+                                                <span class="button"> <i class="icon ion-md-play"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-cellular"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-image"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                                <span class="button text-danger"> <i class="icon ion-md-close"></i> </span>
                                     </div>
                             </li>
 
@@ -228,11 +236,11 @@
                                     <div class="NameAndEdit">
                                         <div class="NameAndEditContainer Center">
                                                 <span class="Name"> Name </span>
-                                                <span class="buttom"> <i class="icon ion-md-play"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-cellular"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-image"></i> </span>
-                                                <span class="buttom"> <i class="icon ion-ios-musical-notes"></i> </span>
-                                                <span class="buttom text-danger"> <i class="icon ion-md-close"></i> </span>
+                                                <span class="button"> <i class="icon ion-md-play"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-cellular"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-image"></i> </span>
+                                                <span class="button"> <i class="icon ion-ios-musical-notes"></i> </span>
+                                                <span class="button text-danger"> <i class="icon ion-md-close"></i> </span>
                                        </div>
                             </li>
                             
@@ -389,178 +397,6 @@
 
     </div>
     <!-- Container Fluid End-->
-    
-    <script>
-        
-        $(document).ready( function () {
-            
-           var hash = function (Message) {
-                var date = moment().format(Message);
-                return CryptoJS.HmacMD5(date, "WuWoo").toString();
-           };
-
-
-            $("#list").click( function () {
-                alert('Click');
-
-                console.log(hash());
-            });
-
-
-            // Create Audio Folder
-            var create_audio_folder = function (FolderName) {
-
-                return  $('<li>', {class:'Pointer'})
-                .append(
-                    $('<i>', {class: 'icon ion-md-folder'})
-                )
-                .append(
-                    $('<span>').html(' ' + FolderName + ' ' )
-                )
-                .append(
-                    $('<span>', {class: 'Folder_Loading d-none'})
-                    .append(
-                        $('<img>', { src: '/images/loading/ghost_loading.svg'})
-                    )
-                ).click(function () {
-                    // Search Sound In Folder 
-                    console.dir($(this));
-                    var loader = $(this)["0"].children[2];
-                    console.dir(loader);
-                    $(loader).removeClass('d-none');
-
-                    setTimeout( function () {
-                        $(loader).addClass('d-none');
-
-                        // If Get Audio File
-                        $('#Audio_List ul li').remove();
-                        $('#Audio_List ul').append(create_audio_file('Knock'));
-                        $('#Audio_List ul').append(create_audio_file('Voice'));
-                        $('#Audio_List ul').append(create_audio_file('Heart'));
-                        $('#Audio_List').removeClass('d-none');
-                    }, 1000);
-                });
-               
-            }
-
-            // Create Audio File
-            var create_audio_file = function (FileName) {
-
-                return $('<li>', {class: 'Pointer'})
-                .append(
-                    $('<a>', {href: '#!'})
-                    .append(
-                        $('<i>', {class: 'icon ion-ios-musical-notes'})
-                    )
-                    .append(' ' + FileName + ' ')
-                );
-            }
-
-            //Audio Folder Li Click
-            $('#Audio li').click( function () {
-                var thiS = $(this);
-                var loader = thiS["0"].children[2];
-
-                $(loader).removeClass('d-none');
-
-                setTimeout(function () {
-                    $(loader).addClass('d-none');
-
-                    // Parent Folder Hide
-                    $('#Audio').addClass('d-none');
-
-                    // Get Array Folder
-                    $('#AudioInside li').remove();
-                    $('#AudioInside').append(create_audio_folder('Door'));
-                    $('#AudioInside').append(create_audio_folder('Voice'));
-                    $('#AudioInside').removeClass('d-none');
-                }, 1000);
-            });
-
-            // Audio Folder Back
-            $('#AudioFolderBack').click( function () {
-                $('#AudioInside').addClass('d-none');
-                $('#Audio').removeClass('d-none');
-                $('#Audio_List ul li').remove();
-            });
-
-            // Create Bg Image Folder 
-            var create_bgImg_folder = function (FolderName) {
-
-                return  $('<li>', {class:'Pointer'})
-                .append(
-                    $('<i>', {class: 'icon ion-md-folder'})
-                )
-                .append(
-                    $('<span>').html(' ' + FolderName + ' ' )
-                )
-                .append(
-                    $('<span>', {class: 'Folder_Loading d-none'})
-                    .append(
-                        $('<img>', { src: '/images/loading/ghost_loading.svg'})
-                    )
-                ).click(function () {
-                    // Search Sound In Folder 
-                    console.dir($(this));
-                    var loader = $(this)["0"].children[2];
-                    console.dir(loader);
-                    $(loader).removeClass('d-none');
-
-                    setTimeout( function () {
-                        $(loader).addClass('d-none');
-
-                        // If Get Audio File
-                        $('#ImageFolder_List div').remove();
-                        $('#ImageFolder_List').append(create_bgImg_file('/images/wall_paper/Evil_With_Sword_in_Dark.jpg'));
-                        $('#ImageFolder_List').append(create_bgImg_file('/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg'));
-                        $('#ImageFolder_List').removeClass('d-none');
-                    }, 1000);
-                });
-
-            }
-
-            // Create Bg Image File
-            var create_bgImg_file = function (FileNameUrl) {
-                
-                return $('<div>', {class:'col-6 ImageDiv', style: "background-image:url('"+ FileNameUrl +"')"})
-                .append(
-                    ' '
-                );
-            }
-
-            // Image Folder Li Click
-            $('#ImageFolder li').click( function () {
-                    var thiS = $(this);
-                    var loader = thiS["0"].children[2];
-
-                    $(loader).removeClass('d-none');
-
-                    setTimeout(function () {
-                        $(loader).addClass('d-none');
-
-                        // Parent Folder Hide
-                        $('#ImageFolder').addClass('d-none');
-
-                        // Get Array Folder
-                        $('#ImageFolderInside li').remove();
-                        $('#ImageFolderInside').append(create_bgImg_folder('House'));
-                        $('#ImageFolderInside').append(create_bgImg_folder('Fields'));
-                        $('#ImageFolderInside').append(create_bgImg_folder('Door'));
-                        $('#ImageFolderInside').removeClass('d-none');
-                    }, 1000);
-                });
-
-            // Image Folder Back
-            $('#ImageFolderBack').click( function () {
-                $('#ImageFolderInside').addClass('d-none');
-                $('#ImageFolder').removeClass('d-none');
-                $('#ImageFolder_List div').remove();
-            });
-
-        });
-
-    </script>
-        
     
 </body>
 </html>

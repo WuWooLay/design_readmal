@@ -57,7 +57,7 @@ $(document).ready( function () {
         {id: '10', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အိမ္ထဲမွာ ေမွာင္မဲေနတာပဲ မီးေတြပ်က္ေနတာလား မသိဘူး....', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '', audio: true, audio_url: '/audio/ghost/female_scary/female_scary_low_1.mp3'},
         {id: '11', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '12', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ခဏေလး အေမ အေရွ့မွာဘာေတြလဲမသိဘူး', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/bats/bats_1.jpg', audio: true, audio_url: '/audio/ghost/bats_sound/bats_sound_1.mp3'},
-        {id: '13', name: 'ေသာ္တာ', position: 'Center', type: 'think', message: 'ဘယ္ကဘယ္လို လင္းႏုိ ့ ေတြေရာက္လာတာလဲမသိဘူး..... ငါစိတ္ထဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/bats/bats_1.jpg', audio: true, audio_url: '/audio/ghost/bats_sound/bats_sound_1.mp3'},
+        {id: '13', name: 'ေသာ္တာ', position: 'Center', type: 'think', message: 'ဘယ္ကဘယ္လို လင္းႏုိ ့ ေတြေရာက္လာတာလဲမသိဘူး..... ငါစိတ္ထဲတစ္မ်ိဳးပဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/bats/bats_1.jpg', audio: true, audio_url: '/audio/ghost/bats_sound/bats_sound_1.mp3'},
     ];
 
     var audioInitialArray = [
@@ -68,7 +68,6 @@ $(document).ready( function () {
         {id: 5, url: "/audio/ghost/bats_sound/bats_sound_1.mp3"},
     ]; 
 
-    
 
     var makeAudio = function (url) {
         this.status = false;
