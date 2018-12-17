@@ -151,6 +151,18 @@ $(document).ready( function () {
 
                         $('#UserListShow > li button.active').removeClass('active');
                         $(this).addClass('active');
+                        var nowClickId = $(this).data('id');
+
+                        newContent.users.map(function (v,k) {
+                            var checkUserObj = JSON.parse(JSON.stringify(v));
+
+                            if(nowClickId == checkUserObj.id) {
+                                selectedUser = checkUserObj;
+                            }
+
+                        });
+
+                        console.log(selectedUser);
                     })
                 )
             )
@@ -168,8 +180,6 @@ $(document).ready( function () {
 
 
     // Added User , Name Position
-    
-
     $('#AddNameFormClick').click( function () {
 
         var name = $('#NameAdd').val();
