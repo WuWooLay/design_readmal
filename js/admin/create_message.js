@@ -1,5 +1,8 @@
 $(document).ready( function () {
-    
+    // Selected User 
+    var selectedUser = {};
+
+
     // Hash Code For Every Milli Second
     var hash = function () {
         var date = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -144,7 +147,11 @@ $(document).ready( function () {
                     $('<button>', {
                         type:'button', class:'btn btn-outline-light  btn-block Update_Name',
                         'data-id': userId, 'data-color': color
-                    }).html(userName)
+                    }).html(userName).click( function () {
+
+                        $('#UserListShow > li button.active').removeClass('active');
+                        $(this).addClass('active');
+                    })
                 )
             )
             .append(
@@ -161,6 +168,7 @@ $(document).ready( function () {
 
 
     // Added User , Name Position
+    
 
     $('#AddNameFormClick').click( function () {
 
