@@ -151,6 +151,7 @@
                         <div class="card-body">
                             <form id="AddNameForm">
 
+
                                     <div class="form-group">
                                         <label for="NameAdd"> လူထည့္ရန္  </label>
                                         <input type="text" class="form-control" id="NameAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
@@ -499,6 +500,8 @@
 
                             <form id="AddNameEditForm">
 
+                                    <input type="hidden" id="NameEditUserId">
+
                                     <div class="form-group">
                                         <label for="NameEditAdd"> နာမည္  </label>
                                         <input type="text" class="form-control" id="NameEditAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
@@ -512,11 +515,11 @@
                                     <!-- Radio Box -->
                                     <div class="">
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                    <input value="Left" checked type="radio" id="Left_Edit_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <input value="Left" checked type="radio" id="Left_Edit_Radio" name="Edit_Position_Radio" class="custom-control-input">
                                                     <label class="custom-control-label Pointer" for="Left_Edit_Radio">Left</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                    <input value="Right" type="radio" id="Right_Edit_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <input value="Right" type="radio" id="Right_Edit_Radio" name="Edit_Position_Radio" class="custom-control-input">
                                                     <label class="custom-control-label Pointer" for="Right_Edit_Radio">Right</label>
                                             </div>
                                     </div>

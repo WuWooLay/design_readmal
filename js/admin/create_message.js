@@ -168,7 +168,7 @@ $(document).ready( function () {
                             }
 
                         });
-
+                        $('#AddedMessage').focus();
                         console.log(selectedUser);
                     })
                 )
@@ -191,8 +191,19 @@ $(document).ready( function () {
 
                         $('#NameEditAdd').val(user.name);
                         $('#HexCodeEditAdd').val(user.color.replace(/#/ , ''));
+                        $('#NameEditUserId').val(user.id);
 
-                        console.log(user);
+                        if(user.position == 'Left') {
+                            $("#Left_Edit_Radio").prop("checked", true);
+                            // $('#Left_Edit_Radio').attr('checked', true);
+                        } if(user.position == 'Right') {
+                            $("#Right_Edit_Radio").prop("checked", true);
+                            // $('#Right_Edit_Radio').attr('checked', true);
+                        }
+
+                        // $('input:radio[name=sex]:nth(1)').attr('checked',true);
+
+                        // console.log(user);
                     })
                 )
             )
@@ -201,7 +212,6 @@ $(document).ready( function () {
 
     // ColorBox Initial
     $('.colorBox').each(function (k,v) {
-        console.log(v);
         $(v).css('background-color', $(v).data('color'));
         $(v).click(function () {
             $('#HexCodeAdd').val($(v).data('color').replace(/#/g, ""));
@@ -209,7 +219,7 @@ $(document).ready( function () {
     });
 
 
-    // Added User , Name Position
+    // Added User , Name , Position
     $('#AddNameFormClick').click( function () {
 
         var name = $('#NameAdd').val();
@@ -233,6 +243,64 @@ $(document).ready( function () {
         console.log(newContent);
         $('#NameAdd').val('');
         $('#HexCodeAdd').val('');
+    });
+
+   
+    // Edit User 
+    $('#AddNameEditFormClick').click( function () {
+        var id = $('#NameEditUserId').val();
+        var name = $('#NameEditAdd').val();
+        var color = "#" + $('#HexCodeEditAdd').val();
+        var position = $('input[name=Edit_Position_Radio]:checked', '#AddNameEditForm').val();
+        var oldPosition = '';
+        var changePosition = false;
+
+        console.log('Id =>', id);
+        console.log('Name =>', name);
+        console.log('Color=>',color);
+        console.log('Position=>', position);
+
+        newContent.users.map(function (v) {
+            if(v.id == id ) {
+                v.name = name;
+                v.color = color;
+                if(v.position != position) {
+                    changePosition = true;
+                    oldPosition = v.position;
+                    v.position = position;
+                }
+            }
+        });
+
+        // If Change Position
+        if(changePosition) {
+            console.log('Change Position');
+            newContent.messages.map( function (v, k) {
+                if(v.name == name && v.type == "Message") {
+                    // console.log($('#'+v.id));
+                    var changeDiv_1 = $('#'+v.id)[0].children[0].children[0];
+                    var changeDiv_2 = $('#'+v.id)[0].children[1].children[0];
+                    $(changeDiv_1).removeClass(oldPosition);
+                    $(changeDiv_1).addClass(position);
+                    $(changeDiv_2).removeClass(oldPosition);
+                    $(changeDiv_2).addClass(position);
+                }
+            });
+        }
+
+        var divName = $('#'+id)[0].children[0].children[0].children[0];
+        var divBtn = $('#'+id)[0].children[0].children[1].children[0];
+        $(divName).html(name);
+        $(divBtn).html(color);
+        $('#'+id).css('background-color', color);
+
+        selectedUser = {};
+        $('#UserListShow button.active').removeClass('active');
+
+
+        console.log('After Edit=>', newContent);
+        $('#UserEditModel').modal('hide');
+
     });
 
     // Added Message
@@ -266,7 +334,18 @@ $(document).ready( function () {
                 scrollTop:$('#Admin_Message_Show_Container')[0].scrollHeight
         }, 500);
 
+
+        $('#AddedMessage').focus();
+
     });
+    $('#AddedMessage').keyup( function (e) {
+        // console.log(e);
+        if(e.which == 13 ) {
+            $('#AddedMessageButton').click();
+        }
+        
+    });
+
 
 
     // Create Audio Folder

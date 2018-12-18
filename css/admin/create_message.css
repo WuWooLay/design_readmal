@@ -86,7 +86,7 @@
     cursor: pointer;
     background-color: #292323;
     color: #ababab;
-    margin: 0 2px;
+    margin: 0 3px;
 }
 .NameAndEditContainer > .button:hover {
     background-color: #fff;
