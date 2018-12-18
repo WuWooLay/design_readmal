@@ -144,6 +144,12 @@
     opacity: 0.8;
 }
 
+.colorBox {
+    width: 100%;
+    height: 40px;
+    background-color: #ddd;
+}
+
 
 /* width */
 ::-webkit-scrollbar {

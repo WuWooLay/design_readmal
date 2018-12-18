@@ -93,7 +93,7 @@ $(document).ready( function () {
             .append(
                 $('<div>', {class: 'NameAndEditContainer ' + position})
                 .append(
-                    $('<span>', {class: 'Name'}).html(Name)
+                    $('<span>', {class: 'Name', style: 'color:' + colorCode}).html(Name)
                 )
                 .append(
                     $('<span>', {class: 'button'})
@@ -145,14 +145,12 @@ $(document).ready( function () {
                 $('<div>', {class: 'col-8'})
                 .append(
                     $('<button>', {
-                        type:'button', class:'btn btn-outline-light  btn-block Update_Name',
+                        type:'button', class:'btn btn-outline-light btn-sm btn-block Update_Name',
                         'data-id': userId, 'data-color': color
                     }).html(userName).click( function () {
 
                         var nowClickId = $(this).data('id');
-
-                        console.log('NowClick', nowClickId);
-                        console.log('selectUser', selectedUser.id);
+                      
                         if(nowClickId == selectedUser.id) {
                             selectedUser = {};
                             $(this).removeClass('active');
@@ -181,11 +179,34 @@ $(document).ready( function () {
                     $('<button>', {
                         type:'button', class:'btn btn-light btn-sm Update_Color',
                         'data-id': userId, 'data-color': color
-                    }).html(color)
+                    }).html(color).click(function () {
+                        $('#UserEditModel').modal('show');
+
+                        var user = '';
+                        var id = $(this).data('id');
+                        
+                        newContent.users.map(function (v, k) {
+                            if (v.id ==  id) user = v;
+                        });
+
+                        $('#NameEditAdd').val(user.name);
+                        $('#HexCodeEditAdd').val(user.color.replace(/#/ , ''));
+
+                        console.log(user);
+                    })
                 )
             )
         );
     };
+
+    // ColorBox Initial
+    $('.colorBox').each(function (k,v) {
+        console.log(v);
+        $(v).css('background-color', $(v).data('color'));
+        $(v).click(function () {
+            $('#HexCodeAdd').val($(v).data('color').replace(/#/g, ""));
+        });
+    });
 
 
     // Added User , Name Position
@@ -208,7 +229,6 @@ $(document).ready( function () {
 
         
         newContent.users.push(new usersFormat(name, hexCode, position ));
-        console.log('NewuserCount', newContent);
         createUserList(newContent.users[newContent.users.length - 1].id, name, hexCode).appendTo('#UserListShow');
         console.log(newContent);
         $('#NameAdd').val('');
@@ -217,7 +237,6 @@ $(document).ready( function () {
 
     // Added Message
     $('#AddedMessageButton').click( function () {
-        console.log(selectedUser);
         var message = $('#AddedMessage').val();
 
         if( !Object.keys(selectedUser).length 

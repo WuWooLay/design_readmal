@@ -150,15 +150,19 @@
                 <div class="card ">
                         <div class="card-body">
                             <form id="AddNameForm">
+
                                     <div class="form-group">
                                         <label for="NameAdd"> လူထည့္ရန္  </label>
                                         <input type="text" class="form-control" id="NameAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="HexCodeAdd"> Hex Color Code  </label>
-                                        <input type="number" class="form-control" id="HexCodeAdd" placeholder="">
+                                        <input type="text" class="form-control" id="HexCodeAdd" placeholder="">
                                     </div>
-                                    <div class="mb-2">
+
+                                    <!-- Radio Box -->
+                                    <div class="">
                                             <div class="custom-control custom-radio custom-control-inline">
                                                     <input value="Left" checked type="radio" id="Left_Radio" name="Position_Radio" class="custom-control-input">
                                                     <label class="custom-control-label Pointer" for="Left_Radio">Left</label>
@@ -168,7 +172,30 @@
                                                     <label class="custom-control-label Pointer" for="Right_Radio">Right</label>
                                             </div>
                                     </div>
-                                    <div>
+                                    <!-- Radio Box End-->
+                                    
+                                    <!-- Color Quick Box -->
+                                    <div class="">
+                                        <div class="container">
+                                                <div class="row">
+                                                        <div class="col-6 mt-2">
+                                                                <div class="colorBox Pointer" data-color="#ff6b6b"></div>
+                                                        </div>
+                                                        <div class="col-6 mt-2">
+                                                                <div class="colorBox Pointer" data-color="#54a0ff"></div>
+                                                        </div>
+                                                        <div class="col-6 mt-2">
+                                                                <div class="colorBox Pointer" data-color="#1dd1a1"></div>
+                                                        </div>
+                                                        <div class="col-6 mt-2">
+                                                                <div class="colorBox Pointer" data-color="#ff80ef"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <!-- Color Quick Box End-->
+
+                                    <div class="mt-2">
                                         <button type="button" id="AddNameFormClick" class="btn mt-2 btn-outline-primary"> ထည့္မည္။ </button>
                                         <button type="button" id="AddNameFormClear" class="btn mt-2 btn-outline-success"> ClearFix </button>
                                     </div>
@@ -454,5 +481,65 @@
                 </div>
     </div>
     <!-- Theme Modal End -->
+
+    <!-- User Edit  Modal -->
+    <div class="modal fade" id="UserEditModel" tabindex="-1" role="dialog" " aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    
+                    <div class="modal-header">
+                      <h5 class="modal-title">User Edit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
+                            <form id="AddNameEditForm">
+
+                                    <div class="form-group">
+                                        <label for="NameEditAdd"> နာမည္  </label>
+                                        <input type="text" class="form-control" id="NameEditAdd" placeholder="နာမည္ရိုက္ထည့္ပါ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="HexCodeEditAdd"> Hex Color Code  </label>
+                                        <input type="text" class="form-control" id="HexCodeEditAdd" placeholder="">
+                                    </div>
+
+                                    <!-- Radio Box -->
+                                    <div class="">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                    <input value="Left" checked type="radio" id="Left_Edit_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <label class="custom-control-label Pointer" for="Left_Edit_Radio">Left</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                    <input value="Right" type="radio" id="Right_Edit_Radio" name="Position_Radio" class="custom-control-input">
+                                                    <label class="custom-control-label Pointer" for="Right_Edit_Radio">Right</label>
+                                            </div>
+                                    </div>
+                                    <!-- Radio Box End-->
+                                    
+
+                                    <div class="mt-2">
+                                        <button type="button" id="AddNameEditFormClick" class="btn mt-2 btn-outline-primary"> ထည့္မည္။ </button>
+                                    </div>
+                            </form>    
+
+                    </div>
+                    <!-- Modal Body End -->
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+    </div>
+    <!-- User Edit  Modal End -->
+
+
 </body>
 </html>
