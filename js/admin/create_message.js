@@ -20,6 +20,7 @@ $(document).ready( function () {
         this.audio = [];
         this.bg_images = [];
         this.users = [];
+        this.themeSound = '';
     };
 
     // Audio Format
@@ -43,14 +44,14 @@ $(document).ready( function () {
     };
 
     // MessageFormat
-    var messagesFormat = function (UserName, position = 'Left', Type = 'Message', Message ) {
+    var messagesFormat = function (hash, UserName, position = 'Left', Type = 'Message', Message ) {
         // {id: '1', name: 'ေသာ္တာ', position: 'Left',
         //  type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', 
         // vibrate: true, vibrate_pattern: [800], background_change: true, 
         // background_image: '/images/bg_images/ghost/house/house_1.jpg',  
         // audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
        
-        this.id = hash();
+        this.id = hash;
         this.name = UserName;
         this.position = position;
         this.type = Type;
@@ -68,7 +69,6 @@ $(document).ready( function () {
     };
 
     var newContent = new mainFormat('Title New ', 1, 'Lwin Moe Paing', 'greenmoezat');
-
 
     // newContent.audio.push(new audioFormat('/audio/ghost/phone_ring/pr_1.mp3'));
     // newContent.bg_images.push(new bgImgFormat('/images/wall_paper/Evil_With_Sword_in_Dark.jpg'));
@@ -149,9 +149,18 @@ $(document).ready( function () {
                         'data-id': userId, 'data-color': color
                     }).html(userName).click( function () {
 
+                        var nowClickId = $(this).data('id');
+
+                        console.log('NowClick', nowClickId);
+                        console.log('selectUser', selectedUser.id);
+                        if(nowClickId == selectedUser.id) {
+                            selectedUser = {};
+                            $(this).removeClass('active');
+                            return false;
+                        }
+
                         $('#UserListShow > li button.active').removeClass('active');
                         $(this).addClass('active');
-                        var nowClickId = $(this).data('id');
 
                         newContent.users.map(function (v,k) {
                             var checkUserObj = JSON.parse(JSON.stringify(v));
@@ -197,19 +206,47 @@ $(document).ready( function () {
 
         hexCode = '#' + hexCode;
 
-        console.log(name.length);
-        console.log(hexCode);
-        console.log(position);
         
         newContent.users.push(new usersFormat(name, hexCode, position ));
+        console.log('NewuserCount', newContent);
         createUserList(newContent.users[newContent.users.length - 1].id, name, hexCode).appendTo('#UserListShow');
         console.log(newContent);
+        $('#NameAdd').val('');
+        $('#HexCodeAdd').val('');
     });
 
-    // Each User Selected
-    $("#list").click( function () {
+    // Added Message
+    $('#AddedMessageButton').click( function () {
+        console.log(selectedUser);
+        var message = $('#AddedMessage').val();
 
-        console.log(hash());
+        if( !Object.keys(selectedUser).length 
+            || typeof selectedUser != "object" 
+            || message.length == 0
+            || message.trim().length <= 1
+            ){
+            // Check User Shi Ma SHi   
+            alert('Error');
+            return false;
+        }
+
+        
+        // createMessage = function (messageId, Message, position, Name, colorCode)
+        // messageCreate(hash(), 'Message', newContent.users[0].position, newContent.users[0].name, newContent.users[0].color).appendTo('#Admin_Message_Show_Ul');
+        var makeHash = hash();
+        var makeNewMessage = new messagesFormat(makeHash ,selectedUser.name, selectedUser.position, 'Message', message);
+        newContent.messages.push(makeNewMessage);
+
+        createMessage(makeHash, message, selectedUser.position, selectedUser.name, selectedUser.color)
+        .appendTo('#Admin_Message_Show_Ul') ;
+
+        $('#AddedMessage').val('');
+       
+        $('#Admin_Message_Show_Container').stop().animate(
+        {
+                scrollTop:$('#Admin_Message_Show_Container')[0].scrollHeight
+        }, 500);
+
     });
 
 
@@ -240,9 +277,15 @@ $(document).ready( function () {
 
                 // If Get Audio File
                 $('#Audio_List ul li').remove();
-                $('#Audio_List ul').append(create_audio_file('Knock'));
-                $('#Audio_List ul').append(create_audio_file('Voice'));
-                $('#Audio_List ul').append(create_audio_file('Heart'));
+
+                var data = [
+                    {'id': 1, url: '/audio/ghost/door/door_1.mp3'}
+                ];
+    
+                data.map( function (v, k) {
+                    $('#Audio_List ul').append(create_audio_file(v.url));
+                });
+
                 $('#Audio_List').removeClass('d-none');
             }, 1000);
         });
@@ -254,13 +297,47 @@ $(document).ready( function () {
 
         return $('<li>', {class: 'Pointer'})
         .append(
-            $('<a>', {href: '#!'})
-            .append(
-                $('<i>', {class: 'icon ion-ios-musical-notes'})
-            )
-            .append(' ' + FileName + ' ')
+           $('<div>')
+           .append(
+                $('<a>', {href: '#!', class: 'mr-1'})
+                .append(
+                    $('<i>', {class: 'icon ion-ios-musical-notes'})
+                )
+                .append(' ' + FileName + ' ')
+           )
+           .append(
+            $('<a>', {href: '#!', class: 'ml-2'})
+                .append(
+                    $('<i>', {class: 'icon ion-md-play'})
+                )
+           )
         );
     }
+
+    // Theme Audio Folder Click
+    $('#ThemeAudio li').click( function () {
+        var thiS = $(this);
+        var loader = thiS["0"].children[2];
+
+        $(loader).removeClass('d-none');
+
+        setTimeout(function () {
+            $(loader).addClass('d-none');
+
+            var data = [
+                {'id': 1, url: '/audio/ghost/theme/theme_1.mp3'}
+            ];
+
+            // Audio File Read & Show
+
+            $('#ThemeAudio_List ul li').remove();
+            data.map( function (v, k) {
+                $('#ThemeAudio_List ul').append(create_audio_file(v.url));
+            });
+
+        }, 1000);
+
+    });
 
     //Audio Folder Li Click
     $('#Audio li').click( function () {
@@ -354,7 +431,7 @@ $(document).ready( function () {
                 $('#ImageFolderInside').append(create_bgImg_folder('Door'));
                 $('#ImageFolderInside').removeClass('d-none');
             }, 1000);
-        });
+    });
 
     // Image Folder Back
     $('#ImageFolderBack').click( function () {

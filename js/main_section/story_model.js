@@ -46,13 +46,13 @@ $(document).ready( function () {
     // {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg',  audio: false, audio_url: ''},
     var messageArray = [
         {id: '1', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/house/house_1.jpg',  audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
-        {id: '2', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက အခုဘယ္မွာမုိ့လုိ့လဲ', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/theme/theme_1.mp3'},
+        {id: '2', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက အခုဘယ္မွာမုိ့လုိ့လဲ', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '3', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'သမီးတုိ့ အရင္ေနခဲ့တယ့္ အိမ္ကိုေရာက္ေနတာ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '4', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက ဘာလုိ့အဲ့ကို ေရာက္ေနတာလဲ ?', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '5', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'သမီးမွာ အရင္အိမ္ေဟာင္းက ေသာ့ရွိေသးတယ္ေလ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '6', name: 'အေမ', position: 'Right', type: 'message', message: 'အဲ့အိမ္မွာ ဘာသြားလုပ္တာလဲ ?', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '7', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ေမေမ ဘာလုိ့ ဒီပါတ္၀န္းက်င္မွာ အရင္ကထက္ရွဳပ္ပြေနတာလဲ', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
-        {id: '8', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: true, audio_url: '/audio/ghost/theme/theme_1.mp3'},
+        {id: '8', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
         {id: '9', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'ခဏေလး သမီးအိမ္ထဲ၀င္ၾကည့္လိုက္ဦးမယ္ ..။', color: '#ff5757', vibrate: false, vibrate_pattern: '', background_change: true, background_image: '/images/bg_images/ghost/door/door_1.jpg', audio: true, audio_url: '/audio/ghost/door/door_1.mp3'},
         {id: '10', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အိမ္ထဲမွာ ေမွာင္မဲေနတာပဲ မီးေတြပ်က္ေနတာလား မသိဘူး....', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: false, background_image: '', audio: true, audio_url: '/audio/ghost/female_scary/female_scary_low_1.mp3'},
         {id: '11', name: 'အေမ', position: 'Right', type: 'message', message: 'နင္အခု ခ်က္ခ်င္း အဲ့အိမ္ကေန ထြက္ခဲ့ေတာ့...', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},
@@ -63,9 +63,8 @@ $(document).ready( function () {
     var audioInitialArray = [
         {id: 1, url: "/audio/ghost/phone_ring/pr_1.mp3"},
         {id: 2, url: "/audio/ghost/female_scary/female_scary_low_1.mp3"},
-        {id: 3, url: "/audio/ghost/theme/theme_1.mp3"},
+        {id: 3, url: "/audio/ghost/bats_sound/bats_sound_1.mp3"},
         {id: 4, url: "/audio/ghost/door/door_1.mp3"},
-        {id: 5, url: "/audio/ghost/bats_sound/bats_sound_1.mp3"},
     ]; 
 
 
@@ -92,6 +91,9 @@ $(document).ready( function () {
     var isOffVibrate = false;
     // Night is?
     var isNightModeCheck = false;
+    // ThemeSound
+    var themeSound = "/audio/ghost/theme/theme_1.mp3";
+    var makeThemeSound = '';
     
 
     var audioPlay = function (Audio_Url) {
@@ -120,6 +122,13 @@ $(document).ready( function () {
             alert('The End');
             return false;
         }
+
+        if(count == 1) {
+            console.log(makeThemeSound);
+            makeThemeSound.audio.loop = true;
+            makeThemeSound.audio.play();
+        }
+        
 
         // console.dir(audioArray);
         var build = '';
@@ -156,7 +165,7 @@ $(document).ready( function () {
         }
 
         if(messageArray[count].audio) {
-            audioPlay(messageArray[count].audio_url);
+                audioPlay(messageArray[count].audio_url);
         }
        
         count++;
@@ -201,9 +210,11 @@ $(document).ready( function () {
 
         // When Play
         if(count < messageArray.length) {
+            
             workingFunc();
 
             autoPlayCount = setInterval( function () {
+
                 if(count >= messageArray.length) {
                     clearInterval(autoPlayCount);
                     pause();
@@ -297,6 +308,8 @@ $(document).ready( function () {
                      console.log(v);
                      v.audio.muted = true;
             });
+
+            makeThemeSound.audio.muted = true;
            
            
         } else {
@@ -321,10 +334,9 @@ $(document).ready( function () {
                      console.log(v);
                      v.audio.muted = false;
             });
+
+            makeThemeSound.audio.muted = false;
             
-            // audioArray.forEach( function (e) {
-            //     e.muted = false;
-            // });
         }
 
         
@@ -473,6 +485,11 @@ $(document).ready( function () {
         audioArray = [];
         
         setTimeout(function () {
+
+            makeThemeSound = new makeAudio(themeSound);
+            makeThemeSound.audio.oncanplaythrough = function () {
+
+            };
 
             audioInitialArray.map(function (v, k) {
                 // console.log(v.url);
