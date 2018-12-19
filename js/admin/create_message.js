@@ -146,6 +146,25 @@ $(document).ready( function () {
                     .append(
                         $('<i>', {class: 'icon ion-md-close'})
                     )
+                    .click( function () {
+
+                       if(!confirm('Are You Sure')) {
+                           return false;
+                       }
+                       var parent = $($($(this).parent()).parent()).parent();
+                       var id = parent[0].id;
+
+                       newContent.messages.map(function (v, k) {
+                        //    console.log('key =>', k);
+                           if(v.id == id) {
+                               newContent.messages.splice(k, 1) ;
+                           }
+                       });
+
+                       $(parent).remove();
+                       console.log('After =>', newContent);
+
+                    })
                 )
             )
         );
@@ -716,8 +735,9 @@ $(document).ready( function () {
     $('#showJson').click( function () {
         $('#JsonModal').modal('show');
         $('#JsonModalInside').html(JSON.stringify(newContent, null, 2));
-        
+
         console.log(JSON.stringify(newContent, null, 2));
     });
+
 
 });
