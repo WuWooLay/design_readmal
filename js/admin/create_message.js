@@ -91,7 +91,17 @@ $(document).ready( function () {
     console.log(newContent);
 
     // Create Message List To Show In Center Edit Box
-    var createMessage = function (messageId, Message, position, Name, colorCode) {
+    var createMessage = function (messageId, Message, position, Name, colorCode, type) {
+
+        if(type == undefined) {
+            type = 'message';
+        }
+
+        if(type == 'think') {
+            position = 'Center';
+            colorCode = '';
+        }
+
         return $('<li>', {class: 'Li',id:messageId})
         .append(
             $('<div>', {class: 'Message'})
@@ -229,12 +239,21 @@ $(document).ready( function () {
             }
         });
 
-        return $('<li>', {class: "list-group-item Pointer ", id: "Center_" + userId})
+        return $('<li>', {class: "list-group-item Pointer ", id: "Center_" + userId, 'data-user-id': userId})
         .html(centerUser.name)
         .click( function () {
             console.log('Alert Click');
             $('#centerText li.active').removeClass('active');
             $(this).addClass('active');
+
+            var user_id = $(this).data('user-id');
+            newContent.users.map( function (v,k) {
+                if(v.id == user_id) {
+                    centerSelectedUser = v;
+                }
+            });
+
+            $('#Vibrate').focus();
         });
     }
 
@@ -273,7 +292,6 @@ $(document).ready( function () {
         $('#NameAdd').val('');
         $('#HexCodeAdd').val('');
     });
-
    
     // Edit User 
     $('#AddNameEditFormClick').click( function () {
@@ -336,6 +354,12 @@ $(document).ready( function () {
             if(obj.changePosition || obj.changeColor ) {
                 console.log('Change Position Or Change Color');
                 newContent.messages.map( function (v, k) {
+
+                    if(v.user_id == id ) {
+                        v.position = position;
+                        v.color = color;
+                    }
+
                     if(v.user_id == id && v.type == "message") {
                         
                         // Change Position
@@ -357,6 +381,7 @@ $(document).ready( function () {
                         $(changeDiv_4).css('color', color);
 
                     }
+                    
                 });
             }
     
@@ -433,9 +458,60 @@ $(document).ready( function () {
         
     });
 
-    // Added Center Message
-    
+    // Added Center None Button
+    $('#CenterTextNone').click( function () {
+        centerSelectedUser = {};
+        $('#centerText li').removeClass('active');
+        $(this).addClass('active');
+        $('#Vibrate').focus();
+    });
 
+    // Added Center Message 
+    $('#CenterTextButton').click( function () {
+
+        var message = $('#Vibrate').val();
+
+        if( message.length == 0 || message.trim().length < 1 ){
+            // Check User Shi Ma SHi   
+            alert('Error');
+            return false;
+        }
+
+        var makeHash = hash();
+        var makeNewMessage = '';
+
+        if( !Object.keys(centerSelectedUser).length || typeof centerSelectedUser != "object" ) {
+            // If None
+            var makeNewMessage = new messagesFormat(makeHash , '', '' , 'Center', 'think', message, '');
+            createMessage(makeHash, message, 'Center', '', '', 'think')
+            .appendTo('#Admin_Message_Show_Ul') ;
+        } else {
+            // If Selected
+             var makeNewMessage = new messagesFormat(makeHash ,centerSelectedUser.name, centerSelectedUser.id , centerSelectedUser.position, 'think', message, centerSelectedUser.color);
+             createMessage(makeHash, message, 'Center', centerSelectedUser.name, centerSelectedUser.color, 'think')
+             .appendTo('#Admin_Message_Show_Ul') ;
+              // centerSelectedUser
+        }
+
+        newContent.messages.push(makeNewMessage);
+       
+        $('#Admin_Message_Show_Container').stop().animate(
+        {
+                scrollTop:$('#Admin_Message_Show_Container')[0].scrollHeight
+        }, 500);
+
+        $('#Vibrate').val('');
+        $('#Vibrate').focus();
+        console.log("After => ", newContent);
+       
+    });
+    $('#Vibrate').keyup( function (e) {
+        // console.log(e);
+        if(e.which == 13 ) {
+            $('#CenterTextButton').click();
+        }
+        
+    });
 
 
     // Create Audio Folder
