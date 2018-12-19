@@ -1,6 +1,7 @@
 $(document).ready( function () {
     // Selected User 
     var selectedUser = {};
+    var centerSelectedUser = {};
 
 
     // Hash Code For Every Milli Second
@@ -37,7 +38,11 @@ $(document).ready( function () {
     };
 
     // User Format
-    var usersFormat = function (UserName, ColorHexCode, position = 'Left') {
+    var usersFormat = function (UserName, ColorHexCode, position) {
+
+        if(position == null ) {
+            position = "Left";
+        }
         this.id = hash();
         this.name = UserName;
         this.color = ColorHexCode;
@@ -45,15 +50,19 @@ $(document).ready( function () {
     };
 
     // MessageFormat
-    var messagesFormat = function (hash, UserName, position = 'Left', Type = 'message', Message, color) {
-        // {id: '1', name: 'ေသာ္တာ', position: 'Left',
-        //  type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', 
-        // vibrate: true, vibrate_pattern: [800], background_change: true, 
-        // background_image: '/images/bg_images/ghost/house/house_1.jpg',  
-        // audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
+    var messagesFormat = function (hash, UserName, User_Id, position , Type , Message, color) {
+        // {id: '1', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/house/house_1.jpg',  audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
+
+        if(position == null ) {
+            position = "Left";
+        }
+        if(Type == null ) {
+            Type = "message";
+        }
        
         this.id = hash;
         this.name = UserName;
+        this.user_id = User_Id;
         this.position = position;
         this.type = Type;
         this.message = Message;
@@ -212,6 +221,24 @@ $(document).ready( function () {
         );
     };
 
+    var createCenterUserList = function (userId) {
+        var centerUser = {};
+        newContent.users.map( function (v,k) {
+            if(v.id == userId) {
+                centerUser = v;
+            }
+        });
+
+        return $('<li>', {class: "list-group-item Pointer ", id: "Center_" + userId})
+        .html(centerUser.name)
+        .click( function () {
+            console.log('Alert Click');
+            $('#centerText li.active').removeClass('active');
+            $(this).addClass('active');
+        });
+    }
+
+
     // ColorBox Initial
     $('.colorBox').each(function (k,v) {
         $(v).css('background-color', $(v).data('color'));
@@ -219,7 +246,6 @@ $(document).ready( function () {
             $('#HexCodeAdd').val($(v).data('color').replace(/#/g, ""));
         });
     });
-
 
     // Added User , Name , Position
     $('#AddNameFormClick').click( function () {
@@ -242,6 +268,7 @@ $(document).ready( function () {
         
         newContent.users.push(new usersFormat(name, hexCode, position ));
         createUserList(newContent.users[newContent.users.length - 1].id, name, hexCode).appendTo('#UserListShow');
+        createCenterUserList(newContent.users[newContent.users.length - 1].id).appendTo('#centerText');
         console.log(newContent);
         $('#NameAdd').val('');
         $('#HexCodeAdd').val('');
@@ -254,14 +281,20 @@ $(document).ready( function () {
         var name = $('#NameEditAdd').val();
         var color = "#" + $('#HexCodeEditAdd').val();
         var position = $('input[name=Edit_Position_Radio]:checked', '#AddNameEditForm').val();
-        var oldPosition = '';
-        var changePosition = false;
-        var oldColor = '';
-        var changeColor = false;
-        console.log('Id =>', id);
-        console.log('Name =>', name);
-        console.log('Color=>',color);
-        console.log('Position=>', position);
+        
+        var obj = {};
+
+        obj.oldName = '';
+        obj.changeName = false;
+        obj.oldPosition = '';
+        obj.changePosition = false;
+        obj.oldColor = '';
+        obj.changeColor = false;
+
+        // console.log('Id =>', id);
+        // console.log('Name =>', name);
+        // console.log('Color=>',color);
+        // console.log('Position=>', position);
 
 
         var divName = $('#'+id)[0].children[0].children[0].children[0];
@@ -273,58 +306,80 @@ $(document).ready( function () {
 
         newContent.users.map(function (v) {
             if(v.id == id ) {
-                v.name = name;
+                
+               
                 if(v.position != position) {
-                    changePosition = true;
-                    oldPosition = v.position;
+                    obj.changePosition = true;
+                    obj.oldPosition = v.position;
                     v.position = position;
                 }
 
-                if(v.color != oldColor ) {
-                    changeColor = true;
-                    oldColor = v.color;
+                if(v.color != color ) {
+                    obj.changeColor = true;
+                    obj.oldColor = v.color;
                     v.color = color;
                 }
+
+                if(v.name != name ) {
+                    obj.changeName = true;
+                    obj.oldName = v.name;
+                    v.name = name;
+                }
+
             }
         });
 
-        // If Change Position
-        if(changePosition) {
-            console.log('Change Position');
-            newContent.messages.map( function (v, k) {
-                if(v.name == name && v.type == "message") {
-                    // console.log($('#'+v.id));
-                    v.position = position;
 
-                    var changeDiv_1 = $('#'+v.id)[0].children[0].children[0];
-                    var changeDiv_2 = $('#'+v.id)[0].children[1].children[0];
+      if(obj.changeColor || obj.changeName || obj.changePosition ) {
 
-                    console.log($('li#'+v.id));
+            // If Change Position or Change Color
+            if(obj.changePosition || obj.changeColor ) {
+                console.log('Change Position Or Change Color');
+                newContent.messages.map( function (v, k) {
+                    if(v.user_id == id && v.type == "message") {
+                        
+                        // Change Position
+                        v.position = position;
+                        var changeDiv_1 = $('#'+v.id)[0].children[0].children[0];
+                        var changeDiv_2 = $('#'+v.id)[0].children[1].children[0];
+    
+                        $(changeDiv_1).removeClass(obj.oldPosition);
+                        $(changeDiv_1).addClass(position);
+                        $(changeDiv_2).removeClass(obj.oldPosition);
+                        $(changeDiv_2).addClass(position);
 
-                    $(changeDiv_1).removeClass(oldPosition);
-                    $(changeDiv_1).addClass(position);
+                        // Change Color
+                        v.color = color;
+    
+                        var changeDiv_3 = $('li#'+v.id)[0].children[0].children[0];
+                        var changeDiv_4 = $('li#'+v.id)[0].children[1].children[0].children[0];
+                        $(changeDiv_3).css('background-color', color);
+                        $(changeDiv_4).css('color', color);
 
-                    $(changeDiv_2).removeClass(oldPosition);
-                    $(changeDiv_2).addClass(position);
-                }
-            });
+                    }
+                });
+            }
+    
+          
+    
+            // If Change Name
+            if(obj.changeName) {
+                console.log('Change Name');
+                newContent.messages.map( function (v, k) {
+                    if(v.user_id == id ) {
+                        // console.log($('#'+v.id));
+                        // console.log($(changeDiv_2));
+    
+                        v.name = name;
+    
+                        var changeDiv_2 = $('li#'+v.id)[0].children[1].children[0].children[0];
+                        $(changeDiv_2).html(name);
+                    }
+                });
+            }
+            
         }
 
-        // If Change Color
-        if(changeColor) {
-            console.log('Change Color');
-            newContent.messages.map( function (v, k) {
-                if(v.name == name && v.type == "message") {
-                    // console.log($('#'+v.id));
-                    v.color = color;
-
-                    var changeDiv_1 = $('li#'+v.id)[0].children[0].children[0];
-                    var changeDiv_2 = $('li#'+v.id)[0].children[1].children[0].children[0];
-                    $(changeDiv_1).css('background-color', color);
-                    $(changeDiv_2).css('color', color);
-                }
-            });
-        }
 
         selectedUser = {};
         $('#UserListShow button.active').removeClass('active');
@@ -353,7 +408,7 @@ $(document).ready( function () {
         // createMessage = function (messageId, Message, position, Name, colorCode)
         // messageCreate(hash(), 'Message', newContent.users[0].position, newContent.users[0].name, newContent.users[0].color).appendTo('#Admin_Message_Show_Ul');
         var makeHash = hash();
-        var makeNewMessage = new messagesFormat(makeHash ,selectedUser.name, selectedUser.position, 'message', message, selectedUser.color);
+        var makeNewMessage = new messagesFormat(makeHash ,selectedUser.name, selectedUser.id , selectedUser.position, 'message', message, selectedUser.color);
         newContent.messages.push(makeNewMessage);
 
         createMessage(makeHash, message, selectedUser.position, selectedUser.name, selectedUser.color)
@@ -377,6 +432,9 @@ $(document).ready( function () {
         }
         
     });
+
+    // Added Center Message
+    
 
 
 
