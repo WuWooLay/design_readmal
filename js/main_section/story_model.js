@@ -43,7 +43,6 @@ $(document).ready( function () {
         return word;
     };
 
-    // {id: '1', name: 'ေကာင္းထက္', position: 'Left', type: 'message', message: 'ဘာမွမျဖစ္ေလာက္ပါဘူးကြာ', color: '#2cc34e', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/story_card/Horror-City-Wallpaper-From-Game-800x600.jpg',  audio: false, audio_url: ''},
     var messageArray = [
         {id: '1', name: 'ေသာ္တာ', position: 'Left', type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', vibrate: true, vibrate_pattern: [800], background_change: true, background_image: '/images/bg_images/ghost/house/house_1.jpg',  audio: true, audio_url: '/audio/ghost/phone_ring/pr_1.mp3'},
         {id: '2', name: 'အေမ', position: 'Right', type: 'message', message: 'သမီးက အခုဘယ္မွာမုိ့လုိ့လဲ', color: '#0097ce', vibrate: false, vibrate_pattern: '', background_change: false, background_image: '',  audio: false, audio_url: ''},

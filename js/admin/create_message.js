@@ -5,8 +5,9 @@ $(document).ready( function () {
 
     // Hash Code For Every Milli Second
     var hash = function () {
-        var date = moment().format('MMMM Do YYYY, h:mm:ss a');
-        return CryptoJS.HmacMD5(date, "Wuwoo" ).toString();
+        var date = moment().format('HH_mm_SSS');
+        return 'WuWoo_' + date + '_' + Math.random().toString(36).substr(2, 16);;
+         
     };
 
     // Main Format 
@@ -44,7 +45,7 @@ $(document).ready( function () {
     };
 
     // MessageFormat
-    var messagesFormat = function (hash, UserName, position = 'Left', Type = 'Message', Message ) {
+    var messagesFormat = function (hash, UserName, position = 'Left', Type = 'message', Message, color) {
         // {id: '1', name: 'ေသာ္တာ', position: 'Left',
         //  type: 'message', message: 'အေဖဘယ္မွာလဲ', color: '#ff5757', 
         // vibrate: true, vibrate_pattern: [800], background_change: true, 
@@ -66,6 +67,7 @@ $(document).ready( function () {
         this.audio = false;
         this.audio_url = '';
 
+        this.color = color;
     };
 
     var newContent = new mainFormat('Title New ', 1, 'Lwin Moe Paing', 'greenmoezat');
@@ -254,20 +256,34 @@ $(document).ready( function () {
         var position = $('input[name=Edit_Position_Radio]:checked', '#AddNameEditForm').val();
         var oldPosition = '';
         var changePosition = false;
-
+        var oldColor = '';
+        var changeColor = false;
         console.log('Id =>', id);
         console.log('Name =>', name);
         console.log('Color=>',color);
         console.log('Position=>', position);
 
+
+        var divName = $('#'+id)[0].children[0].children[0].children[0];
+        var divBtn = $('#'+id)[0].children[0].children[1].children[0];
+        $(divName).html(name);
+        $(divBtn).html(color);
+        $('#'+id).css('background-color', color);
+
+
         newContent.users.map(function (v) {
             if(v.id == id ) {
                 v.name = name;
-                v.color = color;
                 if(v.position != position) {
                     changePosition = true;
                     oldPosition = v.position;
                     v.position = position;
+                }
+
+                if(v.color != oldColor ) {
+                    changeColor = true;
+                    oldColor = v.color;
+                    v.color = color;
                 }
             }
         });
@@ -276,23 +292,39 @@ $(document).ready( function () {
         if(changePosition) {
             console.log('Change Position');
             newContent.messages.map( function (v, k) {
-                if(v.name == name && v.type == "Message") {
+                if(v.name == name && v.type == "message") {
                     // console.log($('#'+v.id));
+                    v.position = position;
+
                     var changeDiv_1 = $('#'+v.id)[0].children[0].children[0];
                     var changeDiv_2 = $('#'+v.id)[0].children[1].children[0];
+
+                    console.log($('li#'+v.id));
+
                     $(changeDiv_1).removeClass(oldPosition);
                     $(changeDiv_1).addClass(position);
+
                     $(changeDiv_2).removeClass(oldPosition);
                     $(changeDiv_2).addClass(position);
                 }
             });
         }
 
-        var divName = $('#'+id)[0].children[0].children[0].children[0];
-        var divBtn = $('#'+id)[0].children[0].children[1].children[0];
-        $(divName).html(name);
-        $(divBtn).html(color);
-        $('#'+id).css('background-color', color);
+        // If Change Color
+        if(changeColor) {
+            console.log('Change Color');
+            newContent.messages.map( function (v, k) {
+                if(v.name == name && v.type == "message") {
+                    // console.log($('#'+v.id));
+                    v.color = color;
+
+                    var changeDiv_1 = $('li#'+v.id)[0].children[0].children[0];
+                    var changeDiv_2 = $('li#'+v.id)[0].children[1].children[0].children[0];
+                    $(changeDiv_1).css('background-color', color);
+                    $(changeDiv_2).css('color', color);
+                }
+            });
+        }
 
         selectedUser = {};
         $('#UserListShow button.active').removeClass('active');
@@ -321,7 +353,7 @@ $(document).ready( function () {
         // createMessage = function (messageId, Message, position, Name, colorCode)
         // messageCreate(hash(), 'Message', newContent.users[0].position, newContent.users[0].name, newContent.users[0].color).appendTo('#Admin_Message_Show_Ul');
         var makeHash = hash();
-        var makeNewMessage = new messagesFormat(makeHash ,selectedUser.name, selectedUser.position, 'Message', message);
+        var makeNewMessage = new messagesFormat(makeHash ,selectedUser.name, selectedUser.position, 'message', message, selectedUser.color);
         newContent.messages.push(makeNewMessage);
 
         createMessage(makeHash, message, selectedUser.position, selectedUser.name, selectedUser.color)
