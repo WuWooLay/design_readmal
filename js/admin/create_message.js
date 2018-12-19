@@ -7,7 +7,7 @@ $(document).ready( function () {
     // Hash Code For Every Milli Second
     var hash = function () {
         var date = moment().format('HH_mm_SSS');
-        return 'WuWoo_' + date + '_' + Math.random().toString(36).substr(2, 16);;
+        return 'WuWoo_' + date + '_' + Math.random().toString(36).substr(2, 16);
          
     };
 
@@ -22,7 +22,7 @@ $(document).ready( function () {
         this.audio = [];
         this.bg_images = [];
         this.users = [];
-        this.themeSound = '';
+        this.themeSound = false;
     };
 
     // Audio Format
@@ -71,10 +71,10 @@ $(document).ready( function () {
         this.vibrate_pattern = [];
 
         this.background_change = false;
-        this.background_image = '';
+        this.background_image = false;
        
         this.audio = false;
-        this.audio_url = '';
+        this.audio_url = false;
 
         this.color = color;
     };
@@ -291,6 +291,13 @@ $(document).ready( function () {
         console.log(newContent);
         $('#NameAdd').val('');
         $('#HexCodeAdd').val('');
+        $('#NameAdd').focus();
+    });
+    $('#HexCodeAdd').keyup( function (e) {
+        // console.log(e);
+        if(e.which == 13 ) {
+            $('#AddNameFormClick').click();
+        }
     });
    
     // Edit User 
@@ -702,6 +709,15 @@ $(document).ready( function () {
         $('#ImageFolderInside').addClass('d-none');
         $('#ImageFolder').removeClass('d-none');
         $('#ImageFolder_List div').remove();
+    });
+
+
+    // Show Json 
+    $('#showJson').click( function () {
+        $('#JsonModal').modal('show');
+        $('#JsonModalInside').html(JSON.stringify(newContent, null, 2));
+        
+        console.log(JSON.stringify(newContent, null, 2));
     });
 
 });
