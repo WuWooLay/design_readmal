@@ -47,7 +47,7 @@ $(document).ready( function () {
     var audioFormat = function (url) {
         this.id = hash();
         this.url = url;
-        this.iteration = 0;
+        this.iteration = 1;
     };
 
     // bgImgFormat
@@ -252,11 +252,25 @@ $(document).ready( function () {
                             $(this).removeClass('active');
 
                             var id = $(this).data('id');
+                            var old_url = '';
 
                             newContent.messages.map( function (v, k) {
                                 if(v.id == id ) {
+                                    old_url = v.audio_url;
                                     v.audio = false;
                                     v.audio_url = false;
+                                }
+                            });
+
+                            // Check And Sub -1
+                            newContent.audio.map( function (v, k) {
+                                if(v.url == old_url) {
+                                    v.iteration--;
+
+                                    // if Coun 0 we 'll remove This Array Room
+                                    if(v.iteration == 0 ) {
+                                        newContent.audio.splice(k, 1) ;
+                                    }
                                 }
                             });
 
@@ -784,30 +798,39 @@ $(document).ready( function () {
                        $('#ThemeSoundModal').modal('hide');
 
                    } else if( type == 'audio') {
-                                  
                             var val = $(this).data('url');
-                                  
-                                    
+                            var isOld = false;
                             console.log(audioSelect);
+                                    
+                            // Check Message Array
+                            newContent.messages.map( function (v, k) {
+                                if(v.id == audioSelect.id) {
+                                    console.log($(v));
+                                    v.audio = true;
+                                    v.audio_url = val;
+                                    $('#Audio_'+ v.id).data('action', 'active');
+                                    $('#Audio_'+ v.id).addClass('active');
+                                    $('#Audio_'+ v.id).removeClass('cursor');
                             
-                                    // Check Message Array
+                                    vibrate.select = false;
+                                    vibrate.id = false;
+                                }
+                            });
                             
-                                    newContent.messages.map( function (v, k) {
-                                        if(v.id == audioSelect.id) {
-                                            console.log($(v));
-                                            v.audio = true;
-                                            v.audio_url = val;
-                                            $('#Audio_'+ v.id).data('action', 'active');
-                                            $('#Audio_'+ v.id).addClass('active');
-                                            $('#Audio_'+ v.id).removeClass('cursor');
-                            
-                                            vibrate.select = false;
-                                            vibrate.id = false;
-                                        }
-                                    });
-                            
-                                    console.log(audioSelect);
-                                    console.log('After Audio =>', newContent);
+                            // Initial Check This is Old From Audio Array
+                            newContent.audio.map( function (v, k) {
+                                if(v.url == val) {
+                                    isOld = true;
+                                    v.iteration++;
+                                }
+                            });
+
+                            if(!isOld) {
+                                newContent.audio.push( new audioFormat(val));
+                            }
+
+                            console.log(audioSelect);
+                            console.log('After Audio =>', newContent);
                             
              
                    }
