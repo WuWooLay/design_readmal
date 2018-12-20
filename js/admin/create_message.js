@@ -140,6 +140,11 @@ $(document).ready( function () {
                         var action = $(this).data('action');
 
                         if(action == 'nothing') {
+
+                            // All Deselect Other Cursor
+                            $('.btnVibrate.cursor').data('action', 'nothing');
+                            $('.btnVibrate.cursor').removeClass('cursor');
+
                             // To Cursor Condition
                             $('#VibrateInput').focus();
 
@@ -161,14 +166,20 @@ $(document).ready( function () {
                         } else if (action == 'active' ) {
                           
                             // Active to Nothing
-                            vibrate.select = false;
-                            vibrate.id = false;
-
                             $(this).data('action', 'nothing');
                             $(this).removeClass('active');
 
+                            var id = $(this).data('id');
+
+                            newContent.messages.map( function (v, k) {
+                                if(v.id == id ) {
+                                    v.vibrate = false;
+                                    v.vibrate_pattern = false;
+                                }
+                            });
+
                             // After Active to Nothing
-                            console.log('After Active=>', newContent);
+                            console.log('After Active=>', newContent.message);
                             
                         }
                         
