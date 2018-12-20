@@ -3,7 +3,21 @@ $(document).ready( function () {
     var selectedUser = {};
     var centerSelectedUser = {};
     
+    // Vibrate
     var vibrate = {
+        select: false,
+        id: false,
+    };
+
+    // Audio Play
+    var audio = {
+        status : false,
+        url : '',
+        obj : false
+    };
+
+    // Audio Select 
+    var audioSelect =  {
         select: false,
         id: false,
     };
@@ -33,6 +47,7 @@ $(document).ready( function () {
     var audioFormat = function (url) {
         this.id = hash();
         this.url = url;
+        this.iteration = 0;
     };
 
     // bgImgFormat
@@ -72,7 +87,7 @@ $(document).ready( function () {
         this.message = Message;
         
         this.vibrate = false;
-        this.vibrate_pattern = [];
+        this.vibrate_pattern = false;
 
         this.background_change = false;
         this.background_image = false;
@@ -179,7 +194,7 @@ $(document).ready( function () {
                             });
 
                             // After Active to Nothing
-                            console.log('After Active=>', newContent.message);
+                            console.log('After Active=>', newContent.messages);
                             
                         }
                         
@@ -193,10 +208,63 @@ $(document).ready( function () {
                     )
                 )
                 .append(
-                    $('<span>', {class: 'button btnAudio ', 'data-action': 'nothing'})
+                    // Audio
+                    $('<span>', {
+                        class: 'button btnAudio ', 
+                        'data-action': 'nothing',
+                        'data-id': messageId,
+                        'id': 'Audio_' + messageId
+                    })
                     .append(
                         $('<i>', {class: 'icon ion-ios-musical-notes'})
-                    )
+                    ).click( function () {
+                       
+                        var action = $(this).data('action');
+
+                        if(action == 'nothing') {
+
+                            // All Deselect Other Cursor
+                            $('.btnAudio.cursor').data('action', 'nothing');
+                            $('.btnAudio.cursor').removeClass('cursor');
+
+                            // To Cursor Condition
+                            // $('#VibrateInput').focus();
+
+                            audioSelect.select = true;
+                            audioSelect.id = $(this).data('id');
+
+                            $(this).addClass('cursor');
+                            $(this).data('action', 'cursor');
+
+                        } else if (action == 'cursor') {
+                          
+                            //  Cursor to Nothing
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('cursor');
+                            audioSelect.select = false;
+                            audioSelect.id = false;
+
+
+                        } else if (action == 'active' ) {
+                          
+                            // Active to Nothing
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('active');
+
+                            var id = $(this).data('id');
+
+                            newContent.messages.map( function (v, k) {
+                                if(v.id == id ) {
+                                    v.audio = false;
+                                    v.audio_url = false;
+                                }
+                            });
+
+                            // After Active to Nothing
+                            console.log('After Active=>', newContent.messages);
+                            
+                        }
+                    })
                 )
                 .append(
                     $('<span>', {class: 'button text-danger', 'data-id': messageId})
@@ -625,7 +693,7 @@ $(document).ready( function () {
            if(v.id == vibrate.id) {
                console.log($(v));
                v.vibrate = true;
-               v.vibrate_pattern = val;
+               v.vibrate_pattern = [parseInt(val)];
                $('#Vibrate_'+ v.id).data('action', 'active');
                $('#Vibrate_'+ v.id).addClass('active');
                $('#Vibrate_'+ v.id).removeClass('cursor');
@@ -634,6 +702,8 @@ $(document).ready( function () {
                vibrate.id = false;
            }
        });
+
+       $('#VibrateInput').val('');
 
        console.log(vibrate);
        console.log('After Vibrate =>', newContent);
@@ -648,7 +718,6 @@ $(document).ready( function () {
         }
         
     });
-    
 
 
     // Create Audio Folder
@@ -680,11 +749,11 @@ $(document).ready( function () {
                 $('#Audio_List ul li').remove();
 
                 var data = [
-                    {'id': 1, url: '/audio/ghost/door/door_1.mp3'}
+                    {'id': 1, name: 'door_1', url: '/audio/ghost/door/door_1.mp3'}
                 ];
     
                 data.map( function (v, k) {
-                    $('#Audio_List ul').append(create_audio_file(v.url));
+                    $('#Audio_List ul').append(create_audio_file(v.name, v.url, 'audio'));
                 });
 
                 $('#Audio_List').removeClass('d-none');
@@ -694,23 +763,74 @@ $(document).ready( function () {
     }
 
     // Create Audio File
-    var create_audio_file = function (FileName) {
+    var create_audio_file = function (FileName, FileUrl, Type) {
 
         return $('<li>', {class: 'Pointer'})
         .append(
            $('<div>')
            .append(
-                $('<a>', {href: '#!', class: 'mr-1'})
+                $('<a>', {href: '#!', class: 'mr-1', 'data-url': FileUrl, 'data-type': Type})
                 .append(
                     $('<i>', {class: 'icon ion-ios-musical-notes'})
                 )
                 .append(' ' + FileName + ' ')
+                .click( function () {
+                  
+                   var type = $(this).data('type');
+                   if(type == 'theme')  {
+                    //    console.log('theme');
+                       newContent.themeSound = $(this).data('url');
+                       $('#ThemeSoundChecked').removeClass('d-none');
+                       $('#ThemeSoundModal').modal('hide');
+
+                   } else if( type == 'audio') {
+                                  
+                            var val = $(this).data('url');
+                                  
+                                    
+                            console.log(audioSelect);
+                            
+                                    // Check Message Array
+                            
+                                    newContent.messages.map( function (v, k) {
+                                        if(v.id == audioSelect.id) {
+                                            console.log($(v));
+                                            v.audio = true;
+                                            v.audio_url = val;
+                                            $('#Audio_'+ v.id).data('action', 'active');
+                                            $('#Audio_'+ v.id).addClass('active');
+                                            $('#Audio_'+ v.id).removeClass('cursor');
+                            
+                                            vibrate.select = false;
+                                            vibrate.id = false;
+                                        }
+                                    });
+                            
+                                    console.log(audioSelect);
+                                    console.log('After Audio =>', newContent);
+                            
+             
+                   }
+
+                })
            )
            .append(
-            $('<a>', {href: '#!', class: 'ml-2'})
+
+                $('<a>', {href: '#!', class: 'ml-2 AudioPlayFile' , 'data-url': FileUrl, 'data-type': Type})
                 .append(
                     $('<i>', {class: 'icon ion-md-play'})
-                )
+                ).click( function () {
+                    console.log('Play');
+                    if(audio.obj) {
+                        audio.obj.muted = true;
+                        audio.obj = false;
+                    }
+                    audio.url = $(this).data('url');
+                    audio.obj = new Audio(audio.url);
+                    audio.obj.play();
+                   console.log(audio);
+                })
+
            )
         );
     }
@@ -726,19 +846,26 @@ $(document).ready( function () {
             $(loader).addClass('d-none');
 
             var data = [
-                {'id': 1, url: '/audio/ghost/theme/theme_1.mp3'}
+                {'id': 1, name: 'theme_1', url: '/audio/ghost/theme/theme_1.mp3'}
             ];
 
             // Audio File Read & Show
 
             $('#ThemeAudio_List ul li').remove();
             data.map( function (v, k) {
-                $('#ThemeAudio_List ul').append(create_audio_file(v.url));
+                $('#ThemeAudio_List ul').append(create_audio_file(v.name, v.url, 'theme'));
             });
 
         }, 1000);
 
     });
+
+    // Theme Sound Clear
+    $('#ThemeSoundClear').click( function () {
+        newContent.themeSound = false;
+        $('#ThemeSoundChecked').addClass('d-none');
+    });
+
 
     //Audio Folder Li Click
     $('#Audio li').click( function () {
@@ -847,7 +974,7 @@ $(document).ready( function () {
         $('#JsonModal').modal('show');
         $('#JsonModalInside').html(JSON.stringify(newContent, null, 2));
 
-        console.log(JSON.stringify(newContent, null, 2));
+        console.log(newContent);
     });
 
 

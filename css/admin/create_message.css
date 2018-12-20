@@ -92,7 +92,8 @@
     background-color: #fff;
 }
 .NameAndEditContainer > .button.active {
-    color: #89afef;
+    color: #fff95c;
+    
 }
 .NameAndEditContainer > .button.cursor {
     background-color: #007bff;
@@ -117,8 +118,7 @@
 }
 
 .Folder > li:hover, .Audio > ul > li:hover {
-    background-color: #efefef;
-
+    /* background-color: #efefef; */
 }
 .Folder > li > i.icon {
     color: #ffcf43;
@@ -150,7 +150,14 @@
     background-color: #ddd;
 }
 
-
+/* Audio */
+.AudioPlayFile {
+    border: 1px solid #bdbdbd;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2rem;
+    margin-top: 0.1rem;
+    display: inline-block;
+}
 /* width */
 ::-webkit-scrollbar {
     width: 0.4rem;
