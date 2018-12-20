@@ -2,13 +2,17 @@ $(document).ready( function () {
     // Selected User 
     var selectedUser = {};
     var centerSelectedUser = {};
+    
+    var vibrate = {
+        select: false,
+        id: false,
+    };
 
 
     // Hash Code For Every Milli Second
     var hash = function () {
         var date = moment().format('HH_mm_SSS');
         return 'WuWoo_' + date + '_' + Math.random().toString(36).substr(2, 16);
-         
     };
 
     // Main Format 
@@ -18,11 +22,11 @@ $(document).ready( function () {
         this.episode = Episode;
         this.writtenBy = WrittenBy;
         this.facebookId = FacebookId;
-        this.messages = [];
+        this.users = [];
         this.audio = [];
         this.bg_images = [];
-        this.users = [];
         this.themeSound = false;
+        this.messages = [];
     };
 
     // Audio Format
@@ -114,35 +118,77 @@ $(document).ready( function () {
             .append(
                 $('<div>', {class: 'NameAndEditContainer ' + position})
                 .append(
-                    $('<span>', {class: 'Name', style: 'color:' + colorCode}).html(Name)
+                    $('<span>', {class: 'Name'}).html(Name)
                 )
                 .append(
                     $('<span>', {class: 'button'})
                     .append(
-                        $('<i>', {class: 'icon ion-md-play'})
+                        $('<i>', {class: 'icon ion-md-play', 'data-action': 'nothing'})
                     )
                 )
                 .append(
-                    $('<span>', {class: 'button'})
+                    // Vibrate
+                    $('<span>', {class: 'button btnVibrate',
+                      'data-action': 'nothing',
+                      'data-id': messageId,
+                      'id': 'Vibrate_' + messageId
+                    })
                     .append(
                         $('<i>', {class: 'icon ion-ios-cellular'})
                     )
+                    .click( function () {
+                        var action = $(this).data('action');
+
+                        if(action == 'nothing') {
+                            // To Cursor Condition
+                            $('#VibrateInput').focus();
+
+                            vibrate.select = true;
+                            vibrate.id = $(this).data('id');
+
+                            $(this).addClass('cursor');
+                            $(this).data('action', 'cursor');
+
+                        } else if (action == 'cursor') {
+                          
+                            //  Cursor to Nothing
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('cursor');
+                            vibrate.select = false;
+                            vibrate.id = false;
+
+
+                        } else if (action == 'active' ) {
+                          
+                            // Active to Nothing
+                            vibrate.select = false;
+                            vibrate.id = false;
+
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('active');
+
+                            // After Active to Nothing
+                            console.log('After Active=>', newContent);
+                            
+                        }
+                        
+                    })
                     
                 )
                 .append(
-                    $('<span>', {class: 'button'})
+                    $('<span>', {class: 'button btnImage'})
                     .append(
                         $('<i>', {class: 'icon ion-ios-image'})
                     )
                 )
                 .append(
-                    $('<span>', {class: 'button'})
+                    $('<span>', {class: 'button btnAudio ', 'data-action': 'nothing'})
                     .append(
                         $('<i>', {class: 'icon ion-ios-musical-notes'})
                     )
                 )
                 .append(
-                    $('<span>', {class: 'button text-danger'})
+                    $('<span>', {class: 'button text-danger', 'data-id': messageId})
                     .append(
                         $('<i>', {class: 'icon ion-md-close'})
                     )
@@ -151,8 +197,19 @@ $(document).ready( function () {
                        if(!confirm('Are You Sure')) {
                            return false;
                        }
-                       var parent = $($($(this).parent()).parent()).parent();
-                       var id = parent[0].id;
+
+                       var id   = $(this).data('id');
+
+                       var vibrateAction = $('#Vibrate_' + id).data('action');
+                      
+                       if(vibrateAction == 'cursor') {
+                          
+                           vibrate.select = false;
+                           vibrate.id = false;
+
+                           console.log('VIbrate Select');
+                           console.log('Vibrate', vibrate);
+                       }
 
                        newContent.messages.map(function (v, k) {
                         //    console.log('key =>', k);
@@ -161,7 +218,7 @@ $(document).ready( function () {
                            }
                        });
 
-                       $(parent).remove();
+                       $('#'+id).remove();
                        console.log('After =>', newContent);
 
                     })
@@ -345,6 +402,7 @@ $(document).ready( function () {
         var divBtn = $('#'+id)[0].children[0].children[1].children[0];
         $(divName).html(name);
         $(divBtn).html(color);
+        $('#Center_'+ id).html(name);
         $('#'+id).css('background-color', color);
 
 
@@ -374,7 +432,7 @@ $(document).ready( function () {
         });
 
 
-      if(obj.changeColor || obj.changeName || obj.changePosition ) {
+        if(obj.changeColor || obj.changeName || obj.changePosition ) {
 
             // If Change Position or Change Color
             if(obj.changePosition || obj.changeColor ) {
@@ -402,9 +460,9 @@ $(document).ready( function () {
                         v.color = color;
     
                         var changeDiv_3 = $('li#'+v.id)[0].children[0].children[0];
-                        var changeDiv_4 = $('li#'+v.id)[0].children[1].children[0].children[0];
+                        // var changeDiv_4 = $('li#'+v.id)[0].children[1].children[0].children[0];
                         $(changeDiv_3).css('background-color', color);
-                        $(changeDiv_4).css('color', color);
+                        // $(changeDiv_4).css('color', color);
 
                     }
                     
@@ -425,6 +483,7 @@ $(document).ready( function () {
     
                         var changeDiv_2 = $('li#'+v.id)[0].children[1].children[0].children[0];
                         $(changeDiv_2).html(name);
+
                     }
                 });
             }
@@ -448,7 +507,7 @@ $(document).ready( function () {
         if( !Object.keys(selectedUser).length 
             || typeof selectedUser != "object" 
             || message.length == 0
-            || message.trim().length <= 1
+            || message.trim().length < 1
             ){
             // Check User Shi Ma SHi   
             alert('Error');
@@ -538,6 +597,47 @@ $(document).ready( function () {
         }
         
     });
+
+    // Added Vibrate 
+    $('#VibrateInputButton').click( function () {
+       var val = $('#VibrateInput').val();
+       console.log(vibrate);
+
+       if(!vibrate.select || val.length <= 2) {
+           alert('Error');
+           return false;
+       }
+
+       // Check Message Array
+
+       newContent.messages.map( function (v, k) {
+           if(v.id == vibrate.id) {
+               console.log($(v));
+               v.vibrate = true;
+               v.vibrate_pattern = val;
+               $('#Vibrate_'+ v.id).data('action', 'active');
+               $('#Vibrate_'+ v.id).addClass('active');
+               $('#Vibrate_'+ v.id).removeClass('cursor');
+
+               vibrate.select = false;
+               vibrate.id = false;
+           }
+       });
+
+       console.log(vibrate);
+       console.log('After Vibrate =>', newContent);
+
+
+    });
+    $('#VibrateInput').keyup( function (e) {
+        // console.log(e);
+        e.preventDefault();
+        if(e.which == 13 ) {
+            $('#VibrateInputButton').click();
+        }
+        
+    });
+    
 
 
     // Create Audio Folder
