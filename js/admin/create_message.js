@@ -133,11 +133,56 @@ $(document).ready( function () {
             // Message Div
             $('<div>', {class: 'Message'})
             .append(
-                $('<span>', {class: position , style: 'background-color: ' + colorCode})
+                $('<span>', {
+                    class: position ,
+                    style: 'background-color: ' + colorCode ,
+                    'data-id': messageId
+                })
                 .html(Message)
                 .click(function () {
                     //Start
                     $('#MessageEditModal').modal('show');
+
+                    var id = $(this).data('id');
+
+                    newContent.messages.map( function (v, k) {
+                        if(v.id == id) {
+                            console.log('FOunded');
+                            console.log('thisis =>', v);
+                            $('#MessageEditAdd').val(v.message);
+
+                            $('#MessageEditUserId').val(id);
+
+                            if( v.audio ) {
+                                // Audio True
+                                console.log('Audio True');
+
+                                $('#MessageEditAudioLink').data('url', v.audio_url);
+                                var name = v.audio_url.split('/')[v.audio_url.split('/').length - 1 ];
+                                $('#MessageEditAudioLink').html(name);
+
+                            } else {
+                                $('#MessageEditAudioLink').html('None');
+                                $('#MessageEditAudioLink').data('url', '');
+                            }
+
+                            if( v.bgImage ) {
+                                console.log('Background => True');
+                                console.log(v.bgImage_url);
+                                $('#MessageEditBackgroundImageShow').css('background-image', 'url(\''+v.bgImage_url+'\')');
+                            } else {
+                                $('#MessageEditBackgroundImageShow').css('background-image','');
+                            }
+                            
+                            if( v.vibrate ) {
+                                $('#MessageEditVibrateShow').html( v.vibrate_pattern[0] + ' milliseconds' );
+                            } else {
+                                $('#MessageEditVibrateShow').html( '0  milliseconds' );
+                            }
+
+                        }
+                    });
+
                     //End
                 })
             )
