@@ -93,7 +93,9 @@
 }
 .NameAndEditContainer > .button.active {
     color: #fff95c;
-    
+}
+.NameAndEditContainer > .button.play{
+    color: #7493ff;
 }
 .NameAndEditContainer > .button.cursor {
     background-color: #007bff;
@@ -157,6 +159,19 @@
     border-radius: 2rem;
     margin-top: 0.1rem;
     display: inline-block;
+}
+
+.width-2rem {
+    width: 2rem;
+}
+.width-1rem {
+    width: 1rem;
+}
+.border-limit {
+    border-right: 16px solid white;
+    border-left: 16px solid white;
+    min-height: 30vh;
+    opacity: 0.7;
 }
 /* width */
 ::-webkit-scrollbar {

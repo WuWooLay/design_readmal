@@ -316,8 +316,8 @@
                                                 <div class="form-group">
                                                   <input type="number" class="form-control"  id="VibrateInput" placeholder="">
                                                 </div>
-                                                <button type="button" id="VibrateInputButton" class="btn btn-primary"> ထည့္မည္။ </button>
-                                                <button type="button" class="btn btn-outline-success"> ClearFix </button>
+                                                <button type="button" id="VibrateInputButton" class="btn btn-sm btn-primary"> ထည့္မည္။ </button>
+                                                <button type="button" class="btn btn-sm btn-outline-success"> ClearFix </button>
                             </div>
                     </div>
                     <!-- VibrateFolder End -->
@@ -331,7 +331,7 @@
                                             <div class="form-group">
                                                 <textarea class="form-control" id="Vibrate" rows="3"></textarea>
                                             </div>
-                                            <button type="button" id="CenterTextButton" class="btn btn-primary"> ထည့္မည္။ </button>
+                                            <button type="button" id="CenterTextButton" class="btn btn-sm btn-primary"> ထည့္မည္။ </button>
                                     </form>
 
                                     <ul class="list-group mt-2" id="centerText">
@@ -557,7 +557,7 @@
         <div class="modal-dialog  modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="JsonModalTitle">Modal title</h5>
+              <h5 class="modal-title" id="JsonModalTitle">Show Json </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -573,6 +573,78 @@
         </div>
     </div>
     <!-- Json Modal End -->
+
+    <!-- Message Edit Modal -->
+    <div class="modal fade" id="MessageEditModal" tabindex="-1" role="dialog" aria-labelledby="MessageEditModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="MessageEditModalTitle">Message Edit </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body" id="MessageEditModalInside">
+
+                        <!-- Edit Message Box -->
+                        <form id="MessageEditForm">
+
+                                        <input type="hidden" val="" id="MessageEditUserId">
+    
+                                        <div class="form-group">
+                                            <label for="MessageEditAdd"> Message  </label>
+                                            <input type="text" class="form-control" id="MessageEditAdd" placeholder="" val="">
+                                        </div>
+    
+                        </form>   
+                        <!-- Edit Message Box End -->
+
+                        <!-- Show Audio url -->
+                        <div class="mt-3">
+                                <div class="row">
+                                        <!-- Audio Col -->
+                                        <div class="col-sm-6 mb-2">
+                                                <div class="border border-primary rounded" id="">
+                                                        <p class="p-3 m-0" id="MessageEditAudioContainer">
+                                                                <a class="play" href="#!" data-url="" > Door_1.mp3 </a>
+                                                                <img class="width-1rem d-none" src="/images/loading/ghost_loading.svg" alt="">
+                                                        </p>
+                                                </div>
+                                        </div>
+                                        <!-- Audio Col End-->
+                                        <!-- Vibrate Col -->
+                                        <div class="col-sm-6 mb-2">
+                                                <div class="border border-primary">
+                                                        <p class="p-3 m-0">
+                                                                <i class="icon ion-md-pulse text-primary"></i>
+                                                                <span class="text-primary" id="MessageEditVibrateShow"> 800 millisecond </span>
+                                                        </p>
+                                                </div>
+                                        </div>
+                                        <!-- Vibrate Col End-->
+
+                                        <!-- Background Images Col -->
+                                        <div class="col-sm-6 mb-2 ImageDiv border-limit rounded" style="background-image: url('/images/wall_paper/Evil_With_Sword_in_Dark.jpg')">
+                                        </div>
+                                        <!-- Background Images Col End-->
+                                </div>
+                        </div>       
+                        <!-- Show Audio url End -->
+
+
+
+                </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="MessageEditFormClick"> Save </button>
+             
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Message Edit Modal End-->
 
 </body>
 </html>

@@ -9,7 +9,7 @@ $(document).ready( function () {
         id: false,
     };
 
-    // Audio Play
+    // Audio Click Play
     var audio = {
         status : false,
         url : '',
@@ -20,6 +20,12 @@ $(document).ready( function () {
     var audioSelect =  {
         select: false,
         id: false,
+    };
+
+     // Bg Select 
+     var backgroundSelect = {
+        select: false,
+        id: false
     };
 
 
@@ -36,9 +42,9 @@ $(document).ready( function () {
         this.episode = Episode;
         this.writtenBy = WrittenBy;
         this.facebookId = FacebookId;
-        this.users = [];
         this.audio = [];
-        this.bg_images = [];
+        this.bgImages = [];
+        this.users = [];
         this.themeSound = false;
         this.messages = [];
     };
@@ -54,6 +60,7 @@ $(document).ready( function () {
     var bgImgFormat = function (url) {
         this.id = hash();
         this.url = url;
+        this.iteration = 1;
     };
 
     // User Format
@@ -89,8 +96,8 @@ $(document).ready( function () {
         this.vibrate = false;
         this.vibrate_pattern = false;
 
-        this.background_change = false;
-        this.background_image = false;
+        this.bgImage = false;
+        this.bgImage_url = false;
        
         this.audio = false;
         this.audio_url = false;
@@ -123,10 +130,18 @@ $(document).ready( function () {
 
         return $('<li>', {class: 'Li',id:messageId})
         .append(
+            // Message Div
             $('<div>', {class: 'Message'})
             .append(
-                $('<span>', {class: position , style: 'background-color: ' + colorCode}).html(Message)
+                $('<span>', {class: position , style: 'background-color: ' + colorCode})
+                .html(Message)
+                .click(function () {
+                    //Start
+                    $('#MessageEditModal').modal('show');
+                    //End
+                })
             )
+            // Message Div End
         )
         .append(
             $('<div>', {class:'NameAndEdit'})
@@ -136,7 +151,8 @@ $(document).ready( function () {
                     $('<span>', {class: 'Name'}).html(Name)
                 )
                 .append(
-                    $('<span>', {class: 'button'})
+                    // Play Click
+                    $('<span>', {class: 'button play'})
                     .append(
                         $('<i>', {class: 'icon ion-md-play', 'data-action': 'nothing'})
                     )
@@ -193,6 +209,12 @@ $(document).ready( function () {
                                 }
                             });
 
+                            if( id == vibrate.id ) {
+                                vibrate.select = false;
+                                vibrate.id = false;
+                            }
+                            
+
                             // After Active to Nothing
                             console.log('After Active=>', newContent.messages);
                             
@@ -202,10 +224,85 @@ $(document).ready( function () {
                     
                 )
                 .append(
-                    $('<span>', {class: 'button btnImage'})
+                    // Background Image
+                    $('<span>', {
+                        class: 'button btnImage',
+                        'data-action': 'nothing',
+                        'data-id': messageId,
+                        'id': 'BackgroundImage_' + messageId
+                    })
                     .append(
                         $('<i>', {class: 'icon ion-ios-image'})
                     )
+                    .click( function () {
+                        // Start
+                        var action = $(this).data('action');
+
+                        if(action == 'nothing') {
+
+                            // All Deselect Other Cursor
+                            $('.btnImage.cursor').data('action', 'nothing');
+                            $('.btnImage.cursor').removeClass('cursor');
+
+                            // To Cursor Condition
+                            // $('#VibrateInput').focus();
+
+                            backgroundSelect.select = true;
+                            backgroundSelect.id = $(this).data('id');
+
+                            $(this).addClass('cursor');
+                            $(this).data('action', 'cursor');
+
+                        } else if (action == 'cursor') {
+                          
+                            //  Cursor to Nothing
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('cursor');
+                            backgroundSelect.select = false;
+                            backgroundSelect.id = false;
+
+
+                        } else if (action == 'active' ) {
+                          
+                            // Active to Nothing
+                            $(this).data('action', 'nothing');
+                            $(this).removeClass('active');
+
+                            var id = $(this).data('id');
+                            var old_url = '';
+
+                            newContent.messages.map( function (v, k) {
+                                if(v.id == id ) {
+                                    old_url = v.bgImage_url;
+                                    v.bgImage = false;
+                                    v.bgImage_url = false;
+                                }
+                            });
+
+                            // Check And Sub -1
+                            newContent.bgImages.map( function (v, k) {
+                                if(v.url == old_url) {
+                                    v.iteration--;
+
+                                    // if Coun 0 we 'll remove This Array Room
+                                    if(v.iteration == 0 ) {
+                                        newContent.bgImages.splice(k, 1) ;
+                                    }
+                                }
+                            });
+
+                            if( id == backgroundSelect.id ) {
+                                backgroundSelect.select = false;
+                                backgroundSelect.id = false;
+                            }
+                           
+                            // After Active to Nothing
+                            console.log('After Active BgImage=>', newContent.messages);
+                            
+                        }
+                    
+                        // End
+                    })
                 )
                 .append(
                     // Audio
@@ -274,6 +371,12 @@ $(document).ready( function () {
                                 }
                             });
 
+                            if( id == audioSelect.id ) {
+                                audioSelect.select = false;
+                                audioSelect.id = false;
+                            }
+
+                           
                             // After Active to Nothing
                             console.log('After Active=>', newContent.messages);
                             
@@ -291,27 +394,108 @@ $(document).ready( function () {
                            return false;
                        }
 
-                       var id   = $(this).data('id');
+                       var id  = $(this).data('id');
 
-                       var vibrateAction = $('#Vibrate_' + id).data('action');
-                      
-                       if(vibrateAction == 'cursor') {
-                          
-                           vibrate.select = false;
-                           vibrate.id = false;
+                        //Vibrate Start    
+                        var vibrateAction = $('#Vibrate_' + id).data('action');
+                        
+                        if(vibrateAction == 'cursor') {
+                            
+                            vibrate.select = false;
+                            vibrate.id = false;
 
-                           console.log('VIbrate Select');
-                           console.log('Vibrate', vibrate);
-                       }
+                            //    console.log('VIbrate Select');
+                            //    console.log('Vibrate', vibrate);
+                        }
+                        //Vibrate End
+                            
 
-                       newContent.messages.map(function (v, k) {
-                        //    console.log('key =>', k);
-                           if(v.id == id) {
-                               newContent.messages.splice(k, 1) ;
-                           }
-                       });
+                        // AUdio Start
+                        var audioAction = $('#Audio_'+ id).data('action');
+                        if (audioAction == 'cursor') {
+                                    //  Cursor to Nothing
+                                    audioSelect.select = false;
+                                    audioSelect.id = false;
+                        }
 
-                       $('#'+id).remove();
+                        newContent.messages.map(function (v, k) {
+                            
+                                //If Found This ID
+                            if(v.id == id) {
+
+                                // If Audio Check There is 1
+                                if(v.audio == true) {
+
+                                    // Check And Sub -1
+                                    newContent.audio.map( function (vv, kk) {
+                                        console.log('Wan lar p ');
+                                        if(vv.url == v.audio_url) {
+                                            console.log('Shar Twe P');
+                                            console.log(vv.url);
+                                            vv.iteration--;
+
+                                            console.log('Iteration=>', vv.iteration);
+
+                                            // if Coun 0 we 'll removve This Array Room
+                                            if(vv.iteration == 0 ) {
+                                                console.log('Key ya b =>', kk);
+                                                newContent.audio.splice(kk, 1) ;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                console.log('Founded',v);
+                                
+                            }
+                        });
+                        // Audio End
+
+                        // Bg Start
+                        var bgAction = $('#BackgroundImage'+ id).data('action');
+                        if (bgAction == 'cursor') {
+                                //  Cursor to Nothing
+                                backgroundSelect.select = false;
+                                backgroundSelect.id = false;
+                        }
+                        newContent.messages.map(function (v, k) {
+                        
+                            //If Found This ID
+                            if(v.id == id) {
+
+                                // If Background Image Check There is 1
+                                if(v.bgImage == true) {
+
+                                    // Check And Sub -1
+                                    newContent.bgImages.map( function (vv, kk) {
+                                        console.log('Wan lar p ');
+                                        if(vv.url == v.bgImage_url) {
+                                            console.log('Shar Twe P');
+                                            console.log(vv.url);
+                                            vv.iteration--;
+
+                                            console.log('Iteration=>', vv.iteration);
+
+                                            // if Coun 0 we 'll removve This Array Room
+                                            if(vv.iteration == 0 ) {
+                                                console.log('Key ya b =>', kk);
+                                                newContent.bgImages.splice(kk, 1) ;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                console.log('Founded',v);
+                                newContent.messages.splice(k, 1) ;
+                                $('#'+id).remove();
+                            }
+
+                           
+
+                        });
+                        // Bg End
+                        
+
                        console.log('After =>', newContent);
 
                     })
@@ -424,7 +608,7 @@ $(document).ready( function () {
 
             $('#Vibrate').focus();
         });
-    }
+    };
 
 
     // ColorBox Initial
@@ -683,13 +867,13 @@ $(document).ready( function () {
         console.log("After => ", newContent);
        
     });
-    $('#Vibrate').keyup( function (e) {
-        // console.log(e);
-        if(e.which == 13 ) {
-            $('#CenterTextButton').click();
-        }
+    // $('#Vibrate').keyup( function (e) {
+    //     // console.log(e);
+    //     if(e.which == 13 ) {
+    //         $('#CenterTextButton').click();
+    //     }
         
-    });
+    // });
 
     // Added Vibrate 
     $('#VibrateInputButton').click( function () {
@@ -774,7 +958,7 @@ $(document).ready( function () {
             }, 1000);
         });
        
-    }
+    };
 
     // Create Audio File
     var create_audio_file = function (FileName, FileUrl, Type) {
@@ -790,6 +974,7 @@ $(document).ready( function () {
                 .append(' ' + FileName + ' ')
                 .click( function () {
                   
+                   // Click Start
                    var type = $(this).data('type');
                    if(type == 'theme')  {
                     //    console.log('theme');
@@ -798,6 +983,13 @@ $(document).ready( function () {
                        $('#ThemeSoundModal').modal('hide');
 
                    } else if( type == 'audio') {
+
+                            console.log(audioSelect);
+                            if(!audioSelect.select || !audioSelect.id ) {
+                                alert('Error');
+                                return false;
+                            }
+
                             var val = $(this).data('url');
                             var isOld = false;
                             console.log(audioSelect);
@@ -812,8 +1004,8 @@ $(document).ready( function () {
                                     $('#Audio_'+ v.id).addClass('active');
                                     $('#Audio_'+ v.id).removeClass('cursor');
                             
-                                    vibrate.select = false;
-                                    vibrate.id = false;
+                                    // vibrate.select = false;
+                                    // vibrate.id = false;
                                 }
                             });
                             
@@ -828,13 +1020,10 @@ $(document).ready( function () {
                             if(!isOld) {
                                 newContent.audio.push( new audioFormat(val));
                             }
-
-                            console.log(audioSelect);
                             console.log('After Audio =>', newContent);
-                            
              
                    }
-
+                   //   Click End
                 })
            )
            .append(
@@ -856,7 +1045,7 @@ $(document).ready( function () {
 
            )
         );
-    }
+    };
 
     // Theme Audio Folder Click
     $('#ThemeAudio li').click( function () {
@@ -951,16 +1140,59 @@ $(document).ready( function () {
             }, 1000);
         });
 
-    }
+    };
 
     // Create Bg Image File
     var create_bgImg_file = function (FileNameUrl) {
         
-        return $('<div>', {class:'col-6 ImageDiv', style: "background-image:url('"+ FileNameUrl +"')"})
+        return $('<div>', {
+            class:'col-6 ImageDiv',
+            'data-url': FileNameUrl,
+            style: "background-image:url('"+ FileNameUrl +"')"
+        })
         .append(
             ' '
-        );
-    }
+        ).click( function () {
+            // Start
+            // console.log(backgroundSelect);
+            if(!backgroundSelect.select || !backgroundSelect.id ) {
+                alert('Error');
+                return false;
+            }
+
+            var val = $(this).data('url');
+            var isOld = false;
+            // console.log(audioSelect);
+                    
+            // Check Message Array
+            newContent.messages.map( function (v, k) {
+                if(v.id == backgroundSelect.id) {
+                    console.log($(v));
+                    v.bgImage = true;
+                    v.bgImage_url = val;
+                    $('#BackgroundImage_'+ v.id).data('action', 'active');
+                    $('#BackgroundImage_'+ v.id).addClass('active');
+                    $('#BackgroundImage_'+ v.id).removeClass('cursor');
+            
+                }
+            });
+            
+            // Initial Check This is Old From Audio Array
+            newContent.bgImages.map( function (v, k) {
+                if(v.url == val) {
+                    isOld = true;
+                    v.iteration++;
+                }
+            });
+
+            if(!isOld) {
+                newContent.bgImages.push( new bgImgFormat(val));
+            }
+            console.log('After BackgroundImage =>', newContent);
+
+            // End
+        });
+    };
 
     // Image Folder Li Click
     $('#ImageFolder li').click( function () {
