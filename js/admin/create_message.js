@@ -2,13 +2,12 @@ $(document).ready( function () {
     // Selected User 
     var selectedUser = {};
     var centerSelectedUser = {};
-    
-    // Vibrate
-    var vibrate = {
-        select: false,
-        id: false,
-    };
-
+    // Format Selected
+    var selectedFormat = function () {
+        this.select = false;
+        this.id = false;
+    }
+   
     // Audio Click Play
     var audio = {
         status : false,
@@ -16,18 +15,14 @@ $(document).ready( function () {
         obj : false
     };
 
+    // Vibrate
+    var vibrate = new selectedFormat();
+
     // Audio Select 
-    var audioSelect =  {
-        select: false,
-        id: false,
-    };
+    var audioSelect =  new selectedFormat();
 
-     // Bg Select 
-     var backgroundSelect = {
-        select: false,
-        id: false
-    };
-
+    // Bg Select 
+    var backgroundSelect = new selectedFormat();
 
     // Hash Code For Every Milli Second
     var hash = function () {
@@ -42,10 +37,10 @@ $(document).ready( function () {
         this.episode = Episode;
         this.writtenBy = WrittenBy;
         this.facebookId = FacebookId;
+        this.themeSound = false;
         this.audio = [];
         this.bgImages = [];
         this.users = [];
-        this.themeSound = false;
         this.messages = [];
     };
 
@@ -133,10 +128,12 @@ $(document).ready( function () {
             // Message Div
             $('<div>', {class: 'Message'})
             .append(
+                // Message Span
                 $('<span>', {
                     class: position ,
-                    style: 'background-color: ' + colorCode ,
-                    'data-id': messageId
+                    style: 'background-color: ' + colorCode,
+                    'data-id': messageId,
+                    id: 'Message_' + messageId
                 })
                 .html(Message)
                 .click(function () {
@@ -189,18 +186,64 @@ $(document).ready( function () {
             // Message Div End
         )
         .append(
+            // Name And Edit Div
             $('<div>', {class:'NameAndEdit'})
             .append(
                 $('<div>', {class: 'NameAndEditContainer ' + position})
                 .append(
-                    $('<span>', {class: 'Name'}).html(Name)
+                    // Name
+                    $('<span>', {
+                        class: 'Name',
+                    }).html(Name)
                 )
                 .append(
                     // Play Click
-                    $('<span>', {class: 'button play'})
+                    $('<span>', {
+                        class: 'button play',
+                        id: 'Play_'+ messageId,
+                        'data-id': messageId
+                    })
                     .append(
                         $('<i>', {class: 'icon ion-md-play', 'data-action': 'nothing'})
                     )
+                    .click( function () {
+                        // Get Id
+                        var id = $(this).data('id');
+                        
+                        newContent.messages.map( function (v, k) {
+
+                            if( v.id == id) {
+
+                                if( v.audio || v.bgImage ) {
+
+                                    // If Audio
+                                    if(v.audio) {
+                                        if(audio.obj) {
+                                            audio.obj.muted = true;
+                                            audio.obj = false;
+                                        }
+                                        audio.url = v.audio_url;
+                                        audio.obj = new Audio(audio.url);
+                                        audio.obj.play();
+                                    }
+
+                                    // If isset BgImage
+                                    if(v.bgImage) {
+                                        $('#Admin_Message_Show_Container').css(
+                                            'background-image', 'url(\''+ v.bgImage_url +'\')'
+                                        );
+                                    }
+
+                                } else {
+                                    alert('Can\'t Play');
+                                    return false;
+                                }
+
+                            }
+
+                        });
+
+                    }) 
                 )
                 .append(
                     // Vibrate
@@ -426,6 +469,7 @@ $(document).ready( function () {
                             console.log('After Active=>', newContent.messages);
                             
                         }
+
                     })
                 )
                 .append(
@@ -1049,8 +1093,8 @@ $(document).ready( function () {
                                     $('#Audio_'+ v.id).addClass('active');
                                     $('#Audio_'+ v.id).removeClass('cursor');
                             
-                                    // vibrate.select = false;
-                                    // vibrate.id = false;
+                                    audioSelect.select = false;
+                                    audioSelect.id = false;
                                 }
                             });
                             
@@ -1218,7 +1262,10 @@ $(document).ready( function () {
                     $('#BackgroundImage_'+ v.id).data('action', 'active');
                     $('#BackgroundImage_'+ v.id).addClass('active');
                     $('#BackgroundImage_'+ v.id).removeClass('cursor');
-            
+                    
+                    backgroundSelect.select = false;
+                    backgroundSelect.id = false;
+                    
                 }
             });
             
@@ -1275,6 +1322,33 @@ $(document).ready( function () {
         $('#JsonModalInside').html(JSON.stringify(newContent, null, 2));
 
         console.log(newContent);
+    });
+
+    // MEssage Edit
+    $('#MessageEditFormClick').click( function () {
+        var obj = {};
+        obj.id = $('#MessageEditUserId').val();
+        obj.message = $('#MessageEditAdd').val();
+
+        // console.log(obj);
+        
+        if(obj.message.length == 0 || obj.message.trim().length < 1) {
+            // Check User Shi Ma SHi   
+            alert('Error');
+            return false;
+        }
+
+        // Search Message
+        newContent.messages.map( function (v, k) {
+            if(v.id == obj.id) {
+                console.log('Lat Shi=>', v);
+                v.message = obj.message;
+                $('#Message_'+ obj.id).html(obj.message);
+            }
+        });
+
+        $('#MessageEditModal').modal('hide');
+
     });
 
 
