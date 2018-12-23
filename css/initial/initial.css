@@ -1,0 +1,135 @@
+.InitialNav {
+    background-color: rgba(0,0,0, 0.95);
+    color: #fff;
+    /* box-shadow: 1px 1px 14px #4387ff; */
+    height: 55px;
+    line-height: 55px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    width: 100%;
+}
+
+.InitialNav span {
+    display: block;
+    line-height: 55px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.InitalBody {
+    /* background-color: #000000; */
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 55px;
+}
+
+.Initial_Choice_Nav {
+    width: 100vw;
+    min-height: 30px;
+    background-color: #000;
+}
+
+.Initial_Choice_Word {
+    color: #4387ff;
+}
+.Initial_Choice_Word:hover {
+    background-color: rgba(255,255,255, 0.1);
+    opacity: 0.85;
+}
+
+.Initial_Choice_Nav_Animate_Bar {
+    position: relative;
+    height: 4px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Initial_Choice_Nav_Animate_Bar_ {
+    width: 50%;
+    position: absolute;
+    height: 3px;
+    background-color: #4387ff;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Content Two Side */
+.Initial_Two_Side {
+    width: 100vw;
+    position: relative;
+    /* background-color: #fff; */
+    min-height: calc(100vh - 55px - 2.5rem);
+    overflow: hidden;
+}
+
+.Initial_Side_One, .Initial_Side_Two{
+    color: #fff;
+    width: 100%;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    background-color: #000;
+}
+
+.Initial_Side_Two {
+    background-color: #fff;
+    left: 100%;
+}
+
+
+.Initial_Side_Img_Container {
+    width: 200px;
+    display: block;
+    margin: 3rem auto 6rem auto;
+}
+
+.Ghost_Btn, .Romance_Btn{
+    transition: all 0.4s linear;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 1.3rem;
+    border: 2px solid #4387ff;
+    min-width: 200px;
+    padding: 0rem 0rem 0.2rem 0rem;
+}
+.Ghost_Btn:hover, .Romance_Btn:hover{
+    outline: 0;
+}
+
+.Ghost_Btn {
+    background-color: #000;
+    color: #4387ff;
+}
+
+.Ghost_Btn:hover {
+    box-shadow: 0 0 0 3px #000, 0 0 0 6px #4387ff;
+    color: #000;
+    background-color: #4387ff;
+    outline: 0;
+}
+
+.Romance_Btn {
+    border: 2px solid #ff5cab;
+    background-color: #fff;
+    color: #ff5cab;
+}
+
+.Romance_Btn:hover {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 6px #ff5cab;
+    color: #fff;
+    background-color: #ff5cab;
+    outline: 0;
+}
+
+
+#Ghost_Logo {
+    animation: jackInTheBox 1.6s ease-in-out 0s infinite alternate both;
+}
+#Romance_Logo {
+    animation: jackInTheBox 1.6s ease-in-out 1s infinite alternate both;
+}
+.dis_inblock_mid {
+    display: block;
+    margin: 0 auto;
+}
